@@ -1,0 +1,149 @@
+@import "tailwindcss";
+
+/* Design tokens. When the 2027 theme is chosen, change these. */
+:root {
+  --paper: #f6f8fa;
+  --surface: #ffffff;
+  --ink: #0f1d33;
+  --muted: #55657a;
+  --line: #d9e1ea;
+  --blue: #0b4a8f;
+  --blue-ink: #ffffff;
+  --green: #0f7a4a;
+  --focus: #2b7bd6;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-blue: var(--blue);
+  --color-green: var(--green);
+  --font-display: "Bricolage Grotesque Variable", system-ui, sans-serif;
+  --font-body: "Public Sans Variable", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+@media (min-width: 768px) {
+  .wrap {
+    padding-inline: 2rem;
+  }
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  border-radius: 999px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 150ms ease, transform 150ms ease;
+}
+
+.btn-lg {
+  padding: 0.9rem 1.6rem;
+  font-size: 1.0625rem;
+}
+
+.btn-sm {
+  padding: 0.5rem 1rem;
+  font-size: 0.9375rem;
+}
+
+.btn-primary {
+  background: var(--blue);
+  color: var(--blue-ink);
+}
+
+.btn-primary:hover {
+  background: #093d77;
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+.btn-pending {
+  background: var(--surface);
+  color: var(--ink);
+  border: 1.5px solid var(--ink);
+  cursor: default;
+}
+
+.btn-disabled {
+  background: var(--line);
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+/* FAQ */
+.faq-item summary {
+  list-style: none;
+  cursor: pointer;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary .faq-sign {
+  transition: transform 150ms ease;
+}
+
+.faq-item[open] summary .faq-sign {
+  transform: rotate(45deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .faq-item summary .faq-sign {
+    transition: none;
+  }
+}
