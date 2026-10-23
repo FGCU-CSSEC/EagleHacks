@@ -1,9 +1,9 @@
-import { site } from "@/config/site";
+import { getPublicSettings } from "@/lib/settings";
 
 type Props = { size?: "lg" | "sm" };
 
-export default function RegisterButton({ size = "lg" }: Props) {
-  const { state, opensLabel, formUrl } = site.registration;
+export default async function RegisterButton({ size = "lg" }: Props) {
+  const { state, opensLabel, applicationUrl: formUrl } = await getPublicSettings();
   const cls = size === "lg" ? "btn btn-lg" : "btn btn-sm";
 
   if ((state === "open" || state === "waitlist") && formUrl) {

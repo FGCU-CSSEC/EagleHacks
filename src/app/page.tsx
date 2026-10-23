@@ -1,5 +1,6 @@
 import RegisterButton from "@/components/RegisterButton";
 import { faq, organizers, site, sponsors } from "@/config/site";
+import { getPublicSettings } from "@/lib/settings";
 
 const nav = [
   { href: "#about", label: "About" },
@@ -8,7 +9,8 @@ const nav = [
   { href: "#team", label: "Team" },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const { eventDates, cap } = await getPublicSettings();
   return (
     <>
       <a
@@ -56,7 +58,7 @@ export default function Home() {
           <dl className="mt-8 grid max-w-3xl grid-cols-2 gap-x-8 gap-y-4 sm:grid-cols-4">
             <div>
               <dt className="text-sm text-muted">When</dt>
-              <dd className="font-semibold">{site.dates}</dd>
+              <dd className="font-semibold">{eventDates}</dd>
             </div>
             <div>
               <dt className="text-sm text-muted">Where</dt>
@@ -68,7 +70,7 @@ export default function Home() {
             </div>
             <div>
               <dt className="text-sm text-muted">Hackers</dt>
-              <dd className="font-semibold">{site.cap} spots</dd>
+              <dd className="font-semibold">{cap} spots</dd>
             </div>
           </dl>
           <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -218,7 +220,7 @@ export default function Home() {
           <div>
             <p className="font-display text-2xl font-bold">EagleHacks {site.year}</p>
             <p className="mt-1 text-white/70">
-              {site.dates} · {site.location}
+              {eventDates} · {site.location}
             </p>
           </div>
           <ul className="flex flex-wrap gap-x-6 gap-y-2 text-[0.9375rem]">

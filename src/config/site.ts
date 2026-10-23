@@ -1,7 +1,8 @@
 // ---------------------------------------------------------------------------
 // EagleHacks site settings
-// Edit this file to change dates, the register button, links and content.
-// Later this moves into the database (site_settings) and the admin dashboard.
+// Dates, cap, registration state/window, application URL and RSVP window now
+// live in the site_settings table (edit at /admin/settings). The values here are
+// the fallback when the database is unreachable or a setting is unset.
 // ---------------------------------------------------------------------------
 
 export type RegistrationState = "coming-soon" | "open" | "waitlist" | "closed";
@@ -15,6 +16,7 @@ export const site = {
   location: "Florida Gulf Coast University, Fort Myers, FL",
   hours: 36,
   cap: 200,
+  rsvpWindowDays: 7, // days an accepted hacker has to confirm
   organizer: "FGCU Computer Science & Software Engineering Club (CSSEC)",
   url: "https://eagle-hacks.com",
 
