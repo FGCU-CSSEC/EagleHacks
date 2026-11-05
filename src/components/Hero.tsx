@@ -1,4 +1,6 @@
 import Image from "next/image";
+import Cta from "@/components/Cta";
+import PressPass from "@/components/PressPass";
 import RegisterButton from "@/components/RegisterButton";
 import SiteHeader from "@/components/SiteHeader";
 import { site } from "@/config/site";
@@ -24,7 +26,7 @@ export default async function Hero() {
         width={448}
         height={733}
         priority
-        className="pointer-events-none absolute -right-24 -bottom-[220px] h-[520px] w-auto max-w-none desk:bottom-auto desk:right-[-6%] desk:top-16 desk:h-[1040px]"
+        className="pointer-events-none absolute -right-24 -bottom-[220px] h-[520px] w-auto max-w-none desk:bottom-auto desk:right-[-6%] desk:top-16 desk:h-[clamp(520px,72vw,1040px)]"
       />
 
       {/*
@@ -38,11 +40,13 @@ export default async function Hero() {
         className="absolute right-4 top-0 z-20 h-[70px] w-12 desk:right-5 desk:h-[88px] desk:w-[60px]"
       />
 
-      <div className="relative mx-auto max-w-[1240px] px-5 desk:px-8">
+      <PressPass />
+
+      <div className="wrap-wide relative">
         <SiteHeader nav={nav} dates={eventDates} instagram={site.links.instagram} linkedin={site.links.linkedin} />
 
-        <div className="max-w-[640px] pb-[316px] pt-10 desk:pb-28 desk:pt-[120px]">
-          <p className="label mb-5 text-muted-dark desk:mb-7">Southwest Florida&rsquo;s hackathon</p>
+        <div className="max-w-[640px] pb-[316px] desk:max-w-[min(640px,58vw)] pt-10 desk:pb-28 desk:pt-[120px]">
+          <p className="label mb-5 text-muted-dark desk:mb-7">{site.tagline}</p>
           <h1 id="hero-h">
             <Image
               src="/brand/wordmark-white.png"
@@ -72,9 +76,9 @@ export default async function Hero() {
           <p className="mt-0.5 text-base text-on-dark desk:text-lg">Florida Gulf Coast University</p>
 
           <div className="mt-7 flex flex-col gap-3.5 desk:mt-9 desk:flex-row desk:flex-wrap desk:items-center desk:gap-x-7 desk:gap-y-4">
-            <a href="#sponsors" className="cta cta-paper w-full desk:w-auto">
-              Sponsor EagleHacks <span aria-hidden="true" className="font-normal [font-stretch:100%]">→</span>
-            </a>
+            <Cta href="#sponsors" className="w-full desk:w-auto">
+              Sponsor EagleHacks
+            </Cta>
             <RegisterButton variant="status" />
           </div>
         </div>

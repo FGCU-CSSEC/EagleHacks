@@ -57,16 +57,16 @@ export default function TeamCarousel({ members }: { members: Member[] }) {
     el.scrollBy({ left: dir * step, behavior: reduce ? "auto" : "smooth" });
   };
 
-  const btn =
+  const navBtn =
     "inline-flex h-11 w-11 items-center justify-center border border-ink text-ink transition-opacity hover:bg-ink hover:text-paper disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-ink";
 
   return (
     <div>
       <div className="flex justify-end gap-2">
-        <button type="button" className={btn} aria-label="Previous team members" disabled={atStart} onClick={() => page(-1)}>
+        <button type="button" className={navBtn} aria-label="Previous team members" disabled={atStart} onClick={() => page(-1)}>
           <Arrow dir="prev" />
         </button>
-        <button type="button" className={btn} aria-label="Next team members" disabled={atEnd} onClick={() => page(1)}>
+        <button type="button" className={navBtn} aria-label="Next team members" disabled={atEnd} onClick={() => page(1)}>
           <Arrow dir="next" />
         </button>
       </div>

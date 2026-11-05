@@ -12,7 +12,7 @@
   --accent: #2f6fd6;
   --focus: #2f6fd6;
 
-  /* Legacy aliases used by sections not yet re-skinned. Remove with them. */
+  /* Aliases for the older .btn / .wrap styles still used by the admin pages and unfinished sections. */
   --surface: #f3f0e8;
   --line: #cfc9bb;
   --blue: #2f6fd6;
@@ -66,8 +66,10 @@ h3 {
   line-height: 1.1;
 }
 
-a {
-  color: inherit;
+@layer base {
+  a {
+    color: inherit;
+  }
 }
 
 :focus-visible {
@@ -137,85 +139,90 @@ a {
   cursor: not-allowed;
 }
 
-/* FAQ */
-.faq-item summary {
-  list-style: none;
-  cursor: pointer;
-}
-
-.faq-item summary::-webkit-details-marker {
-  display: none;
-}
-
-.faq-item summary .faq-sign {
-  transition: transform 150ms ease;
-}
-
-.faq-item[open] summary .faq-sign {
-  transform: rotate(45deg);
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .btn,
-  .faq-item summary .faq-sign {
+  .btn {
     transition: none;
   }
 }
 
-/* Condensed headline style: width axis 62.5%, heavy, uppercase, tight. */
-.cond {
-  font-stretch: 62.5%;
-  text-transform: uppercase;
-}
+/* Layout helpers for the re-skinned sections (the admin pages still use .wrap). */
+@layer components {
+  .wrap-wide {
+    width: 100%;
+    max-width: 1240px;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
 
-.h-display {
-  font-stretch: 62.5%;
-  text-transform: uppercase;
-  font-weight: 900;
-  line-height: 0.86;
-}
+  .sec-pad {
+    padding-block: 72px;
+  }
 
-/* Small labels: 12px, bold, uppercase, tracked. */
-.label {
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-}
+  @media (min-width: 761px) {
+    .wrap-wide {
+      padding-inline: 2rem;
+    }
 
-/* Hero CTA / sponsor CTA buttons (square, condensed). */
-.cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  min-height: 56px;
-  padding: 0 24px 0 26px;
-  font-stretch: 62.5%;
-  text-transform: uppercase;
-  font-size: 22px;
-  font-weight: 800;
-  text-decoration: none;
-  transition: opacity 150ms ease;
-}
+    .sec-pad {
+      padding-block: 112px;
+    }
+  }
 
-.cta:hover {
-  opacity: 0.85;
-}
+  /* Condensed headline style: width axis 62.5%, heavy, uppercase, tight. */
+  .cond {
+    font-stretch: 62.5%;
+    text-transform: uppercase;
+  }
 
-.cta-paper {
-  background: var(--paper);
-  color: var(--ink);
-}
+  .h-display {
+    font-stretch: 62.5%;
+    text-transform: uppercase;
+    font-weight: 900;
+    line-height: 0.86;
+  }
 
-.cta-accent {
-  background: var(--accent);
-  color: #fff;
-}
+  /* Small labels: 12px, bold, uppercase, tracked. */
+  .label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
 
-@media (min-width: 761px) {
+  /* Hero CTA / sponsor CTA buttons (square, condensed). */
   .cta {
-    font-size: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    min-height: 56px;
+    padding: 0 24px 0 26px;
+    font-stretch: 62.5%;
+    text-transform: uppercase;
+    font-size: 22px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: opacity 150ms ease;
+  }
+
+  .cta:hover {
+    opacity: 0.85;
+  }
+
+  .cta-paper {
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  .cta-accent {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  @media (min-width: 761px) {
+    .cta {
+      font-size: 24px;
+    }
   }
 }
 
@@ -253,4 +260,10 @@ a {
   .m-team { grid-column: 6 / 10; grid-row: 1; }
   .m-stat { grid-column: 6 / 10; grid-row: 2; }
   .m-award { grid-column: 10 / 13; grid-row: 1 / 3; }
+}
+
+/* Set by CustomCursor on mouse devices: hide the system cursor, we draw our own. */
+html.custom-cursor,
+html.custom-cursor * {
+  cursor: none !important;
 }

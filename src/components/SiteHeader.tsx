@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Cta from "@/components/Cta";
 import { useEffect, useRef, useState } from "react";
 
 type NavItem = { href: string; label: string };
@@ -49,7 +50,7 @@ export default function SiteHeader({ nav, dates, instagram, linkedin }: Props) {
 
   return (
     <>
-      <header className="flex h-[72px] items-center justify-between gap-x-8 pr-[76px] desk:h-auto desk:py-[22px] desk:pr-24">
+      <header className="flex h-[72px] items-center justify-between gap-x-8 pr-[76px] desk:h-auto desk:py-[22px] desk:pr-24 min-[1100px]:pr-56">
         <a href="#" aria-label="EagleHacks home" className="flex min-h-11 items-center no-underline">
           <Image
             src="/brand/wordmark-white.png"
@@ -104,7 +105,7 @@ export default function SiteHeader({ nav, dates, instagram, linkedin }: Props) {
                 key={n.href}
                 href={n.href}
                 onClick={close}
-                className="h-display block border-b border-rule-dark py-3.5 text-[52px] leading-none! no-underline"
+                className="h-display block border-b border-rule-dark py-3.5 text-[52px] leading-none no-underline"
               >
                 {n.label}
               </a>
@@ -112,9 +113,9 @@ export default function SiteHeader({ nav, dates, instagram, linkedin }: Props) {
           </nav>
           <div className="mt-auto pt-12">
             <p className="mb-4 text-[15px] text-on-dark">{dates} · Fort Myers, FL</p>
-            <a href="#sponsors" onClick={close} className="cta cta-paper w-full">
-              Sponsor EagleHacks <span aria-hidden="true" className="font-normal [font-stretch:100%]">→</span>
-            </a>
+            <Cta href="#sponsors" onClick={close} className="w-full">
+              Sponsor EagleHacks
+            </Cta>
             <div className="mt-4 flex gap-6">
               <a className="label inline-block py-3" href={instagram} target="_blank" rel="noopener noreferrer">
                 Instagram

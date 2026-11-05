@@ -26,13 +26,13 @@ function Follow() {
 }
 
 export default async function RegisterButton({ size = "lg", variant = "button" }: Props) {
-  const { state, opensLabel, applicationUrl: formUrl } = await getPublicSettings();
+  const { state, applicationUrl: formUrl } = await getPublicSettings();
 
   if (variant === "status") {
-    const cls = "m-0 text-sm leading-[1.45] text-on-dark desk:text-[15px]";
+    const textCls = "m-0 text-sm leading-[1.45] text-on-dark desk:text-[15px]";
     if ((state === "open" || state === "waitlist") && formUrl) {
       return (
-        <p className={cls}>
+        <p className={textCls}>
           {state === "open" ? "Hacker applications are open." : "Applications are full; join the waitlist."}
           <br />
           <a href={formUrl} target="_blank" rel="noopener noreferrer" className={textLink}>
@@ -43,8 +43,8 @@ export default async function RegisterButton({ size = "lg", variant = "button" }
       );
     }
     return (
-      <p className={cls}>
-        {state === "closed" ? "Hacker applications are closed." : `Hacker applications open ${opensLabel}.`}
+      <p className={textCls}>
+        {state === "closed" ? "Hacker applications are closed." : "Hacker applications open soon."}
         <br className="hidden desk:inline" /> <Follow />
       </p>
     );
@@ -70,7 +70,7 @@ export default async function RegisterButton({ size = "lg", variant = "button" }
 
   return (
     <span className={`${cls} btn-pending`} aria-disabled="true">
-      Applications open {opensLabel}
+      Applications open soon
     </span>
   );
 }

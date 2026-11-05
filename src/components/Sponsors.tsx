@@ -1,18 +1,13 @@
 import Image from "next/image";
-import { site } from "@/config/site";
-
-const perks = [
-  { title: "Recruit", body: "Meet students while they build, not just on paper." },
-  { title: "Showcase", body: "Run a workshop or put your API and hardware in hackers’ hands." },
-  { title: "Invest locally", body: "Back Southwest Florida’s student tech community." },
-];
+import Cta from "@/components/Cta";
+import { site, sponsorPerks } from "@/config/site";
 
 export default function Sponsors() {
   return (
     <section id="sponsors" aria-labelledby="sp-h" className="scroll-mt-4 bg-ink text-paper">
-      <div className="mx-auto grid max-w-[1240px] gap-x-[72px] px-5 py-[72px] desk:grid-cols-[minmax(0,1fr)_minmax(0,320px)] desk:px-8 desk:py-28">
+      <div className="wrap-wide sec-pad grid gap-x-[72px] desk:grid-cols-[minmax(0,1fr)_minmax(0,320px)]">
         <div className="desk:col-start-1 desk:row-start-1">
-          <h2 id="sp-h" className="h-display text-[clamp(52px,7vw,104px)] leading-[0.88]!">
+          <h2 id="sp-h" className="h-display text-[clamp(52px,7vw,104px)] leading-[0.88]">
             Sponsor EagleHacks {site.year}
           </h2>
           <p className="mt-7 max-w-[560px] text-xl leading-normal text-on-dark">
@@ -33,11 +28,11 @@ export default function Sponsors() {
 
         <div className="desk:col-start-1 desk:row-start-2">
           <ul className="m-0 list-none p-0 desk:mt-11">
-            {perks.map((p, i) => (
+            {sponsorPerks.map((p, i) => (
               <li
                 key={p.title}
                 className={`flex flex-wrap gap-x-6 gap-y-1 border-t border-rule-dark py-4 ${
-                  i === perks.length - 1 ? "border-b" : ""
+                  i === sponsorPerks.length - 1 ? "border-b" : ""
                 }`}
               >
                 <span className="cond w-[180px] shrink-0 text-[26px] font-extrabold leading-[1.1]">{p.title}</span>
@@ -46,12 +41,9 @@ export default function Sponsors() {
             ))}
           </ul>
           <div className="mt-10 flex flex-col gap-x-7 gap-y-4 desk:flex-row desk:flex-wrap desk:items-center">
-            <a
-              href={`mailto:${site.links.email}?subject=EagleHacks%20${site.year}%20sponsorship`}
-              className="cta cta-accent w-full desk:w-auto"
-            >
-              Request the sponsor packet <span aria-hidden="true" className="font-normal [font-stretch:100%]">→</span>
-            </a>
+            <Cta variant="accent" href={`mailto:${site.links.email}?subject=EagleHacks%20${site.year}%20sponsorship`} className="w-full desk:w-auto">
+              Request the sponsor packet
+            </Cta>
             <p className="m-0 text-[15px] text-muted-dark">In-kind welcome: food, swag, hardware, cloud credits.</p>
           </div>
         </div>

@@ -10,14 +10,14 @@ export type RegistrationState = "coming-soon" | "open" | "waitlist" | "closed";
 export const site = {
   name: "EagleHacks",
   year: 2027,
-  tagline: "Southwest Florida's hackathon",
+  tagline: "FGCU's 4th Annual Hackathon",
   dates: "March 12–14, 2027",
   startDate: "2027-03-12",
   location: "Florida Gulf Coast University, Fort Myers, FL",
   hours: 36,
   cap: 200,
   rsvpWindowDays: 7, // days an accepted hacker has to confirm
-  organizer: "FGCU Computer Science & Software Engineering Club (CSSEC)",
+  organizer: "FGCU Computer Science & Software Engineering Club (CSSEC) and INIT FGCU",
   url: "https://eagle-hacks.com",
 
   registration: {
@@ -75,6 +75,17 @@ export const faq: { q: string; a: string }[] = [
   },
 ];
 
+// Organizing groups, shown with their logos in the footer.
+export const organizers: { name: string; logo: string; width: number; height: number }[] = [
+  {
+    name: "FGCU Computer Science & Software Engineering Club (CSSEC)",
+    logo: "/brand/cssec-white.png",
+    width: 600,
+    height: 514,
+  },
+  { name: "INIT FGCU", logo: "/brand/init-fgcu-white.png", width: 454, height: 326 },
+];
+
 // 2027 team, in display order. Headshots: drop a file named after the key into
 // public/photos/headshots/ (e.g. allison.webp; .jpg, .jpeg and .png also work).
 // Until a file exists the card shows initials.
@@ -86,6 +97,20 @@ export const team: { key: string; name: string; role: string; linkedin?: string 
   { key: "conrado", name: "Conrado Santizo", role: "Budgeting, Marketing", linkedin: "https://www.linkedin.com/in/conrado-santizo/" },
   { key: "javier", name: "Javier Tellez", role: "Marketing, Events", linkedin: "https://www.linkedin.com/in/javier-tellez-0297ba222/" },
   { key: "mihails", name: "Mihails Balalajs", role: "Communications, Budgeting, Events" },
+];
+
+// The three columns in the About section.
+export const aboutPillars: { title: string; body: string }[] = [
+  { title: "Build", body: "A project from scratch, solo or in a team of up to four." },
+  { title: "Learn", body: "Workshops from mentors and sponsors. No experience needed." },
+  { title: "Meet", body: "Recruiters and engineers from local and national companies." },
+];
+
+// Reasons to sponsor, shown in the sponsors band.
+export const sponsorPerks: { title: string; body: string }[] = [
+  { title: "Recruit", body: "Meet students while they build, not just on paper." },
+  { title: "Showcase", body: "Run a workshop or put your API and hardware in hackers’ hands." },
+  { title: "Invest locally", body: "Back Southwest Florida’s student tech community." },
 ];
 
 // 2027 sponsors go here as they sign. Leave empty to show the "become a sponsor" message.

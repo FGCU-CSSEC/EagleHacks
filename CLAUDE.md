@@ -6,7 +6,7 @@
 
 - EagleHacks 2027, March 12–14, 2027, at FGCU
 - MLH member event; 18+ only
-- Cap of 200 confirmed hackers
+- Cap of ~200 confirmed hackers
 
 ## Stack
 
