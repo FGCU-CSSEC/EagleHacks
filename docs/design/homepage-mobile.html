@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EagleHacks 2027 mobile</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&amp;display=swap">
+<style>
+body{margin:0;background:#F3F0E8}
+a{color:inherit}
+.cond{font-stretch:62.5%;text-transform:uppercase}
+.label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.14em}
+</style>
+</helmet>
+<div style="position: relative; width: 390px; background: #F3F0E8; color: #111111; font-family: 'Archivo', system-ui, sans-serif; font-size: 16px; line-height: 1.55; overflow: hidden">
+
+<sc-if value="{{menuOpen}}" hint-placeholder-val="{{false}}">
+<div role="dialog" aria-modal="true" aria-label="Menu" style="position: absolute; top: 0; left: 0; right: 0; min-height: 844px; z-index: 10; background: #111111; color: #F3F0E8; display: flex; flex-direction: column; padding: 0 20px 32px; box-sizing: border-box">
+<div style="display: flex; align-items: center; justify-content: space-between; height: 72px">
+<img src="/brand/wordmark-white.png" alt="EagleHacks" style="height: 15px; width: auto">
+<button type="button" class="label" onClick="{{closeMenu}}" style="display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 4px; background: none; border: 0; color: #F3F0E8; font-family: inherit">Close
+<svg aria-hidden="true" width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#F3F0E8" stroke-width="2"><path d="M1 1l14 14M15 1L1 15"></path></svg>
+</button>
+</div>
+<nav aria-label="Main" style="margin-top: 40px; border-top: 1px solid #4A4741">
+<a href="#m-about" onClick="{{closeMenu}}" class="cond" style="display: block; padding: 14px 0; border-bottom: 1px solid #4A4741; text-decoration: none; font-size: 52px; font-weight: 900; line-height: 1">About</a>
+<a href="#m-sponsors" onClick="{{closeMenu}}" class="cond" style="display: block; padding: 14px 0; border-bottom: 1px solid #4A4741; text-decoration: none; font-size: 52px; font-weight: 900; line-height: 1">Sponsors</a>
+<a href="#m-faq" onClick="{{closeMenu}}" class="cond" style="display: block; padding: 14px 0; border-bottom: 1px solid #4A4741; text-decoration: none; font-size: 52px; font-weight: 900; line-height: 1">FAQ</a>
+<a href="#m-team" onClick="{{closeMenu}}" class="cond" style="display: block; padding: 14px 0; border-bottom: 1px solid #4A4741; text-decoration: none; font-size: 52px; font-weight: 900; line-height: 1">Team</a>
+</nav>
+<div style="margin-top: auto; padding-top: 48px">
+<p style="margin: 0 0 16px; font-size: 15px; color: #D9D4C8">March 12&ndash;14, 2027 &middot; Fort Myers, FL</p>
+<a href="#m-sponsors" onClick="{{closeMenu}}" class="cond" style="display: flex; align-items: center; justify-content: space-between; min-height: 56px; padding: 0 20px; background: #F3F0E8; color: #111111; text-decoration: none; font-size: 22px; font-weight: 800">Sponsor EagleHacks <span aria-hidden="true" style="font-stretch: 100%; font-weight: 400">&rarr;</span></a>
+<div style="display: flex; gap: 24px; margin-top: 16px">
+<a class="label" href="https://www.instagram.com/init.fgcu/" style="display: inline-block; padding: 12px 0">Instagram</a>
+<a class="label" href="https://www.linkedin.com/company/init-fgcu" style="display: inline-block; padding: 12px 0">LinkedIn</a>
+</div>
+</div>
+</div>
+</sc-if>
+
+<section aria-labelledby="m-hero-h" style="position: relative; background: #111111; color: #F3F0E8; overflow: hidden">
+<div class="label" aria-label="MLH trust badge placeholder" style="position: absolute; top: 0; right: 16px; width: 48px; height: 70px; border: 1.5px dashed #6E6A62; border-top: 0; display: flex; align-items: center; justify-content: center; text-align: center; font-size: 8px; letter-spacing: .06em; color: #A9A397; z-index: 2">MLH</div>
+<header style="display: flex; align-items: center; justify-content: space-between; height: 72px; padding: 0 76px 0 20px">
+<a href="#" aria-label="EagleHacks home" style="display: flex; align-items: center; min-height: 44px">
+<img src="/brand/wordmark-white.png" alt="EagleHacks" style="height: 15px; width: auto">
+</a>
+<button type="button" class="label" aria-label="Open menu" onClick="{{openMenu}}" style="display: inline-flex; align-items: center; gap: 10px; min-height: 44px; padding: 0 4px; background: none; border: 0; color: #F3F0E8; font-family: inherit">Menu
+<svg aria-hidden="true" width="20" height="12" viewBox="0 0 20 12" fill="none" stroke="#F3F0E8" stroke-width="2"><path d="M0 1h20M0 6h20M0 11h20"></path></svg>
+</button>
+</header>
+
+<div style="padding: 40px 20px 0">
+<p class="label" style="margin: 0 0 20px; color: #A9A397">Southwest Florida&rsquo;s hackathon</p>
+<h1 id="m-hero-h" style="margin: 0">
+<img src="/brand/wordmark-white.png" alt="EagleHacks" style="display: block; width: 100%; height: auto">
+<img src="/brand/2027-white.png" alt="2027" style="display: block; width: 56%; height: auto; margin-top: 14px">
+</h1>
+<p style="margin: 28px 0 0; font-size: 18px; font-weight: 700; line-height: 1.35">March 12&ndash;14, 2027<br>Fort Myers, FL</p>
+<p style="margin: 2px 0 0; font-size: 16px; color: #D9D4C8">Florida Gulf Coast University</p>
+<a href="#m-sponsors" class="cond" style="display: flex; align-items: center; justify-content: space-between; min-height: 56px; margin-top: 28px; padding: 0 20px; background: #F3F0E8; color: #111111; text-decoration: none; font-size: 22px; font-weight: 800">Sponsor EagleHacks <span aria-hidden="true" style="font-stretch: 100%; font-weight: 400">&rarr;</span></a>
+<p style="margin: 14px 0 0; font-size: 14px; line-height: 1.45; color: #D9D4C8">Hacker applications open January 2027. Follow along on <a href="https://www.instagram.com/init.fgcu/" style="color: #F3F0E8; text-underline-offset: 3px">Instagram</a> and <a href="https://www.linkedin.com/company/init-fgcu" style="color: #F3F0E8; text-underline-offset: 3px">LinkedIn</a>.</p>
+</div>
+<div aria-hidden="true" style="position: relative; height: 300px; margin-top: 16px">
+<img src="/brand/eagle-white.png" alt="" style="position: absolute; top: 0; right: -96px; height: 520px; width: auto">
+</div>
+</section>
+
+<section aria-label="Photos from EagleHacks 2026" style="background: #111111; padding: 0 6px 6px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: 230px 190px 190px; gap: 6px">
+<img src="/photos/crowd.webp" alt="Hackers smiling in the audience at EagleHacks 2026" loading="lazy" style="grid-column: 1 / 3; width: 100%; height: 100%; object-fit: cover; object-position: center 45%; display: block">
+<img src="/photos/award.webp" alt="A winning hacker accepting a prize on stage" loading="lazy" style="grid-column: 1; grid-row: 2 / 4; width: 100%; height: 100%; object-fit: cover; object-position: center 30%; display: block">
+<img src="/photos/team-laptop.webp" alt="A team gathered around a laptop" loading="lazy" style="grid-column: 2; grid-row: 2; width: 100%; height: 100%; object-fit: cover; object-position: 40% 30%; display: block">
+<div style="grid-column: 2; grid-row: 3; background: #F3F0E8; color: #111111; display: flex; align-items: flex-end; padding: 16px">
+<p class="cond" style="margin: 0; font-size: 30px; font-weight: 900; line-height: .9">36 hours.<br>200 hackers.<br>One weekend.</p>
+</div>
+</section>
+
+<section id="m-about" aria-labelledby="m-about-h" style="padding: 72px 20px">
+<h2 id="m-about-h" class="cond" style="margin: 0; font-weight: 900; font-size: 64px; line-height: .86">Build.<br>Learn.<br>Meet.</h2>
+<p style="margin: 24px 0 0; font-size: 17px; line-height: 1.55; color: #3A3732">EagleHacks is a 36-hour hackathon at Florida Gulf Coast University. Students from FGCU and schools across Florida team up, build something new, and present it to judges from industry. Free, beginner-friendly, 18+.</p>
+<div style="margin-top: 40px">
+<div style="display: flex; gap: 16px; align-items: baseline; border-top: 2px solid #111111; padding: 14px 0 18px">
+<h3 class="cond" style="flex: 0 0 96px; margin: 0; font-size: 30px; font-weight: 800; line-height: 1">Build</h3>
+<p style="margin: 0; font-size: 15px; color: #3A3732">A project from scratch, solo or in a team of up to four.</p>
+</div>
+<div style="display: flex; gap: 16px; align-items: baseline; border-top: 2px solid #111111; padding: 14px 0 18px">
+<h3 class="cond" style="flex: 0 0 96px; margin: 0; font-size: 30px; font-weight: 800; line-height: 1">Learn</h3>
+<p style="margin: 0; font-size: 15px; color: #3A3732">Workshops from mentors and sponsors. No experience needed.</p>
+</div>
+<div style="display: flex; gap: 16px; align-items: baseline; border-top: 2px solid #111111; border-bottom: 2px solid #111111; padding: 14px 0 18px">
+<h3 class="cond" style="flex: 0 0 96px; margin: 0; font-size: 30px; font-weight: 800; line-height: 1">Meet</h3>
+<p style="margin: 0; font-size: 15px; color: #3A3732">Recruiters and engineers from local and national companies.</p>
+</div>
+</div>
+</section>
+
+<section id="m-sponsors" aria-labelledby="m-sp-h" style="background: #111111; color: #F3F0E8; padding: 72px 20px">
+<h2 id="m-sp-h" class="cond" style="margin: 0; font-weight: 900; font-size: 56px; line-height: .88">Sponsor EagleHacks 2027</h2>
+<p style="margin: 20px 0 0; font-size: 17px; line-height: 1.5; color: #D9D4C8">Sponsors keep EagleHacks free for every hacker while connecting with the next generation of engineers and innovators!</p>
+<img src="/photos/sponsor-booth.webp" alt="A sponsor recruiter talking with a student at the EagleHacks 2026 career fair" loading="lazy" style="display: block; width: calc(100% + 40px); margin: 32px -20px 0; height: 420px; object-fit: cover; object-position: center 20%">
+<ul style="list-style: none; margin: 32px 0 0; padding: 0">
+<li style="border-top: 1px solid #4A4741; padding: 14px 0"><span class="cond" style="display: block; font-size: 26px; font-weight: 800; line-height: 1.1">Recruit</span><span style="display: block; margin-top: 4px; font-size: 15px; color: #D9D4C8">Meet students while they build, not just on paper.</span></li>
+<li style="border-top: 1px solid #4A4741; padding: 14px 0"><span class="cond" style="display: block; font-size: 26px; font-weight: 800; line-height: 1.1">Showcase</span><span style="display: block; margin-top: 4px; font-size: 15px; color: #D9D4C8">Run a workshop or put your API and hardware in hackers&rsquo; hands.</span></li>
+<li style="border-top: 1px solid #4A4741; border-bottom: 1px solid #4A4741; padding: 14px 0"><span class="cond" style="display: block; font-size: 26px; font-weight: 800; line-height: 1.1">Invest locally</span><span style="display: block; margin-top: 4px; font-size: 15px; color: #D9D4C8">Back Southwest Florida&rsquo;s student tech community.</span></li>
+</ul>
+<a href="mailto:fgcu.cssec@gmail.com?subject=EagleHacks%202027%20sponsorship" class="cond" style="display: flex; align-items: center; justify-content: space-between; min-height: 56px; margin-top: 32px; padding: 0 20px; background: #2F6FD6; color: #FFFFFF; text-decoration: none; font-size: 22px; font-weight: 800">Request the sponsor packet <span aria-hidden="true" style="font-stretch: 100%; font-weight: 400">&rarr;</span></a>
+<p style="margin: 14px 0 0; font-size: 14px; color: #A9A397">In-kind welcome: food, swag, hardware, cloud credits.</p>
+</section>
+
+<section id="m-faq" aria-labelledby="m-faq-h" style="padding: 72px 20px 56px">
+<h2 id="m-faq-h" class="cond" style="margin: 0; font-weight: 900; font-size: 64px; line-height: .86">FAQ</h2>
+<div style="margin-top: 28px; border-bottom: 1px solid #111111">
+<sc-for list="{{faq}}" as="item" hint-placeholder-count="8">
+<div style="border-top: 1px solid #111111">
+<h3 style="margin: 0">
+<button type="button" onClick="{{item.toggle}}" aria-expanded="{{item.expanded}}" style="display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 16px; min-height: 60px; padding: 14px 0; background: none; border: 0; color: #111111; font-family: inherit; font-size: 17px; font-weight: 700; line-height: 1.3; text-align: left">
+<span>{{item.q}}</span>
+<span aria-hidden="true" style="flex: none; font-size: 24px; font-weight: 400; line-height: 1">{{item.sign}}</span>
+</button>
+</h3>
+<sc-if value="{{item.open}}" hint-placeholder-val="{{false}}">
+<p style="margin: 0; padding: 0 32px 20px 0; font-size: 15px; color: #3A3732">{{item.a}}</p>
+</sc-if>
+</div>
+</sc-for>
+</div>
+<p style="margin: 20px 0 0; font-size: 15px; color: #5C5850">Something else? <a href="mailto:fgcu.cssec@gmail.com" style="color: #111111">fgcu.cssec@gmail.com</a></p>
+</section>
+
+<section id="m-team" aria-labelledby="m-team-h" style="padding: 16px 20px 72px">
+<h2 id="m-team-h" class="cond" style="margin: 0; font-weight: 900; font-size: 64px; line-height: .86">The team</h2>
+<ul style="list-style: none; margin: 28px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px">
+<sc-for list="{{staff}}" as="s" hint-placeholder-count="8">
+<li style="border-top: 1px solid #111111; padding: 12px 0 18px">
+<p style="margin: 0; font-size: 17px; font-weight: 700">{{s.name}}</p>
+<p style="margin: 2px 0 0; font-size: 13px; line-height: 1.35; color: #5C5850">{{s.role}}</p>
+</li>
+</sc-for>
+</ul>
+</section>
+
+<footer style="background: #111111; color: #F3F0E8; padding: 48px 20px 36px">
+<div style="display: flex; align-items: center; gap: 14px">
+<img src="/brand/eagle-white.png" alt="" style="height: 56px; width: auto">
+<div>
+<img src="/brand/wordmark-white.png" alt="EagleHacks" style="display: block; height: 18px; width: auto">
+<p class="label" style="margin: 8px 0 0; color: #A9A397">Fort Myers, FL</p>
+</div>
+</div>
+<p class="label" style="margin: 36px 0 14px; color: #A9A397">Organized by</p>
+<div style="display: flex; align-items: center; gap: 24px">
+<img src="/brand/cssec-white.png" alt="FGCU Computer Science &amp; Software Engineering Club (CSSEC)" style="height: 52px; width: auto">
+<img src="/brand/init-fgcu-white.png" alt="INIT FGCU" style="height: 48px; width: auto">
+</div>
+<ul style="list-style: none; margin: 32px 0 0; padding: 12px 0 0; border-top: 1px solid #4A4741; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 16px">
+<li><a class="label" href="https://www.instagram.com/init.fgcu/" style="display: block; padding: 13px 0">Instagram</a></li>
+<li><a class="label" href="https://www.linkedin.com/company/init-fgcu" style="display: block; padding: 13px 0">LinkedIn</a></li>
+<li><a class="label" href="mailto:fgcu.cssec@gmail.com" style="display: block; padding: 13px 0">Email</a></li>
+<li><a class="label" href="https://github.com/MLH/mlh-policies/blob/main/code-of-conduct.md" style="display: block; padding: 13px 0">MLH Code of Conduct</a></li>
+</ul>
+</footer>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"accent":{"editor":"color","default":"#2F6FD6","options":["#2F6FD6","#0F7A4A","#C8341E","#F3F0E8"]},"$preview":{"width":390,"height":5000}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { menuOpen: false, openIdx: 0 };
+  }
+  renderVals() {
+    const faq = [
+      { q: 'What is a hackathon?', a: 'A weekend where students team up to build a project from scratch, learn at workshops, and demo for judges who award prizes.' },
+      { q: 'How much experience do I need?', a: 'None. First-timers are welcome, with beginner workshops and mentors on hand.' },
+      { q: 'How much does it cost?', a: 'Nothing. Food, swag and the venue are covered by our sponsors.' },
+      { q: 'Who can participate?', a: 'Students and recent grads 18 or older, from any school or major. Everyone follows the MLH Code of Conduct.' },
+      { q: 'How big can my team be?', a: 'Up to four. Come solo and find a team at the event.' },
+      { q: 'What should I bring?', a: 'A laptop, charger, valid ID, and whatever keeps you comfortable overnight.' },
+      { q: 'Will there be food?', a: 'Yes, meals and snacks all weekend. Tell us about dietary needs when you apply.' },
+      { q: 'How can my company sponsor?', a: 'Email fgcu.cssec@gmail.com and we will send the 2027 sponsorship packet.' }
+    ];
+    const openIdx = this.state.openIdx;
+    return {
+      accent: this.props.accent ?? '#2F6FD6',
+      menuOpen: this.state.menuOpen,
+      openMenu: () => this.setState({ menuOpen: true }),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      faq: faq.map((f, i) => ({
+        ...f,
+        open: openIdx === i,
+        expanded: openIdx === i ? 'true' : 'false',
+        sign: openIdx === i ? '−' : '+',
+        toggle: () => this.setState({ openIdx: openIdx === i ? -1 : i })
+      })),
+      staff: [
+        { name: '[Name]', role: 'Lead coordinator' },
+        { name: '[Name]', role: 'Co-lead coordinator' },
+        { name: '[Name]', role: 'Budget & sponsorships' },
+        { name: '[Name]', role: 'Events' },
+        { name: '[Name]', role: 'Logistics' },
+        { name: '[Name]', role: 'Marketing' },
+        { name: '[Name]', role: 'Communications' },
+        { name: '[Name]', role: 'Faculty advisor' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

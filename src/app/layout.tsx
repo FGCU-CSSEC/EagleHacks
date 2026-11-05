@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import "@fontsource-variable/bricolage-grotesque";
-import "@fontsource-variable/public-sans";
+import "@fontsource-variable/archivo/wdth.css";
 import { site } from "@/config/site";
 import { getPublicSettings } from "@/lib/settings";
 import "./globals.css";
