@@ -19,7 +19,7 @@ Almost everything lives in **`src/config/site.ts`**:
 
 - Dates, location, hours, cap
 - Register button state and the Airtable form link
-- Discord, Instagram, LinkedIn, email, Devpost, hacker guide links
+- Instagram, LinkedIn, email, Devpost, hacker guide links
 - FAQ questions and answers
 - Organizers (currently the 2026 team; update for 2027)
 - Sponsors (empty list shows the "email us about sponsoring" message)

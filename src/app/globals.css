@@ -2,27 +2,42 @@
 
 /* Design tokens. When the 2027 theme is chosen, change these. */
 :root {
-  --paper: #f6f8fa;
-  --surface: #ffffff;
-  --ink: #0f1d33;
-  --muted: #55657a;
-  --line: #d9e1ea;
-  --blue: #0b4a8f;
+  --ink: #111111;
+  --paper: #f3f0e8;
+  --on-dark: #d9d4c8; /* body text on dark */
+  --muted-dark: #a9a397; /* muted text on dark */
+  --muted: #5c5850; /* muted text on light */
+  --body-light: #3a3732; /* body text on light */
+  --rule-dark: #4a4741; /* rules on dark */
+  --accent: #2f6fd6;
+  --focus: #2f6fd6;
+
+  /* Aliases for the older .btn / .wrap styles still used by the admin pages and unfinished sections. */
+  --surface: #f3f0e8;
+  --line: #cfc9bb;
+  --blue: #2f6fd6;
   --blue-ink: #ffffff;
   --green: #0f7a4a;
-  --focus: #2b7bd6;
 }
 
 @theme inline {
-  --color-paper: var(--paper);
-  --color-surface: var(--surface);
   --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-on-dark: var(--on-dark);
+  --color-muted-dark: var(--muted-dark);
   --color-muted: var(--muted);
+  --color-body-light: var(--body-light);
+  --color-rule-dark: var(--rule-dark);
+  --color-accent: var(--accent);
+  --color-surface: var(--surface);
   --color-line: var(--line);
   --color-blue: var(--blue);
   --color-green: var(--green);
-  --font-display: "Bricolage Grotesque Variable", system-ui, sans-serif;
-  --font-body: "Public Sans Variable", system-ui, sans-serif;
+  --font-sans: "Archivo Variable", system-ui, sans-serif;
+  --font-display: "Archivo Variable", system-ui, sans-serif;
+  --font-body: "Archivo Variable", system-ui, sans-serif;
+  /* Desktop layout starts above 760px; the mobile layout is 760px and below. */
+  --breakpoint-desk: 761px;
 }
 
 html {
@@ -39,8 +54,8 @@ body {
   background: var(--paper);
   color: var(--ink);
   font-family: var(--font-body);
-  font-size: 1.0625rem;
-  line-height: 1.6;
+  font-size: 1.125rem;
+  line-height: 1.55;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -49,11 +64,12 @@ h2,
 h3 {
   font-family: var(--font-display);
   line-height: 1.1;
-  letter-spacing: -0.02em;
 }
 
-a {
-  color: inherit;
+@layer base {
+  a {
+    color: inherit;
+  }
 }
 
 :focus-visible {
@@ -123,27 +139,131 @@ a {
   cursor: not-allowed;
 }
 
-/* FAQ */
-.faq-item summary {
-  list-style: none;
-  cursor: pointer;
-}
-
-.faq-item summary::-webkit-details-marker {
-  display: none;
-}
-
-.faq-item summary .faq-sign {
-  transition: transform 150ms ease;
-}
-
-.faq-item[open] summary .faq-sign {
-  transform: rotate(45deg);
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .btn,
-  .faq-item summary .faq-sign {
+  .btn {
     transition: none;
   }
+}
+
+/* Layout helpers for the re-skinned sections (the admin pages still use .wrap). */
+@layer components {
+  .wrap-wide {
+    width: 100%;
+    max-width: 1240px;
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  .sec-pad {
+    padding-block: 72px;
+  }
+
+  @media (min-width: 761px) {
+    .wrap-wide {
+      padding-inline: 2rem;
+    }
+
+    .sec-pad {
+      padding-block: 112px;
+    }
+  }
+
+  /* Condensed headline style: width axis 62.5%, heavy, uppercase, tight. */
+  .cond {
+    font-stretch: 62.5%;
+    text-transform: uppercase;
+  }
+
+  .h-display {
+    font-stretch: 62.5%;
+    text-transform: uppercase;
+    font-weight: 900;
+    line-height: 0.86;
+  }
+
+  /* Small labels: 12px, bold, uppercase, tracked. */
+  .label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+
+  /* Hero CTA / sponsor CTA buttons (square, condensed). */
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    min-height: 56px;
+    padding: 0 24px 0 26px;
+    font-stretch: 62.5%;
+    text-transform: uppercase;
+    font-size: 22px;
+    font-weight: 800;
+    text-decoration: none;
+    transition: opacity 150ms ease;
+  }
+
+  .cta:hover {
+    opacity: 0.85;
+  }
+
+  .cta-paper {
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  .cta-accent {
+    background: var(--accent);
+    color: #fff;
+  }
+
+  @media (min-width: 761px) {
+    .cta {
+      font-size: 24px;
+    }
+  }
+}
+
+/* Photo mosaic: 12 columns, two 300px rows on desktop; 2 columns on mobile. */
+.mosaic {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 240px 200px 200px;
+  gap: 8px;
+  max-width: 1440px;
+  margin-inline: auto;
+}
+
+.mosaic > * {
+  position: relative;
+  min-width: 0;
+  min-height: 0;
+}
+
+.mosaic img {
+  object-fit: cover;
+}
+
+.m-crowd { grid-column: 1 / 3; grid-row: 1; }
+.m-award { grid-column: 1; grid-row: 2 / 4; }
+.m-team { grid-column: 2; grid-row: 2; }
+.m-stat { grid-column: 2; grid-row: 3; }
+
+@media (min-width: 761px) {
+  .mosaic {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-rows: 300px 300px;
+  }
+  .m-crowd { grid-column: 1 / 6; grid-row: 1 / 3; }
+  .m-team { grid-column: 6 / 10; grid-row: 1; }
+  .m-stat { grid-column: 6 / 10; grid-row: 2; }
+  .m-award { grid-column: 10 / 13; grid-row: 1 / 3; }
+}
+
+/* Set by CustomCursor on mouse devices: hide the system cursor, we draw our own. */
+html.custom-cursor,
+html.custom-cursor * {
+  cursor: none !important;
 }
