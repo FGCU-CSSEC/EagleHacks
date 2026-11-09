@@ -29,7 +29,7 @@ export default function FaqList({ items }: { items: Item[] }) {
       {items.map((item, i) => {
         const open = isDesktop || openIndex === i;
         return (
-          <div key={item.q} className="border-t border-ink py-1 desk:pb-[30px] desk:pt-5">
+          <div key={item.q} className="border-t border-ink/25 py-1 desk:pb-[30px] desk:pt-5">
             <h3 className="m-0">
               <button
                 type="button"
@@ -46,14 +46,19 @@ export default function FaqList({ items }: { items: Item[] }) {
                 </span>
               </button>
             </h3>
-            <p
+            <div
               id={`faq-a-${i}`}
               role="region"
               aria-labelledby={`faq-q-${i}`}
-              className={`m-0 pb-4 text-base text-body-light desk:mt-1.5 desk:block desk:pb-0 ${open ? "block" : "hidden"}`}
+              inert={!open}
+              className={`grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none desk:mt-1.5 desk:grid-rows-[1fr] ${
+                open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+              }`}
             >
-              {item.a}
-            </p>
+              <div className="overflow-hidden">
+                <p className="m-0 pb-4 text-base text-body-light desk:pb-0">{item.a}</p>
+              </div>
+            </div>
           </div>
         );
       })}

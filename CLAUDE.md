@@ -20,7 +20,7 @@
 ## Current state
 
 - The site is the public shell. The hacker portal (sign-in, confirm button, QR check-in, admin) gets built on top of it by December.
-- Registration state, opens/closes times, Airtable form URL, event dates, cap and RSVP window live in the `site_settings` table (keys: `registration_override`, `registration_opens_at`, `registration_closes_at`, `application_url`, `event_dates`, `cap`, `rsvp_window_days`). Admins edit them at `/admin/settings`. `src/lib/settings.ts` reads them, cached 60s (tag `site-settings`), and `src/config/site.ts` is the fallback. Everything else in `site.ts` (links, FAQ, organizers, sponsors) is still code.
+- Registration state, opens/closes times, Airtable form URL, event dates, cap and RSVP window live in the `site_settings` table (keys: `registration_override`, `registration_opens_at`, `registration_closes_at`, `application_url`, `event_dates`, `cap`, `rsvp_window_days`). Admins edit them at `/admin/settings`. `src/lib/settings.ts` reads them, cached 60s (tag `site-settings`), and `src/config/site.ts` is the fallback. Everything else in `site.ts` (links, FAQ, organizers, team, About and sponsor copy) is still code.
 - The button state comes from `src/lib/registration.ts`: admin override, else the dates, else the `site.ts` / `NEXT_PUBLIC_REGISTRATION_STATE` fallback. Times are entered in Eastern and stored as UTC.
 - `npm test` runs the unit checks in `src/lib/registration.test.mjs`.
 - Keep the current design tokens at the top of `src/app/globals.css`.

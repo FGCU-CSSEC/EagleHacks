@@ -6,6 +6,8 @@ const links = [
   { href: site.links.linkedin, label: "LinkedIn", external: true },
   { href: `mailto:${site.links.email}`, label: "Email", external: false },
   { href: site.links.mlhCodeOfConduct, label: "MLH Code of Conduct", external: true },
+  { href: site.links.mlhPrivacy, label: "MLH Privacy Policy", external: true },
+  { href: site.links.mlhTerms, label: "MLH Terms", external: true },
 ];
 
 export default function Footer() {
@@ -30,14 +32,22 @@ export default function Footer() {
           <p className="label m-0 text-muted-dark">Organized by</p>
           <div className="flex items-center gap-6 desk:gap-7">
             {organizers.map((o, i) => (
-              <Image
+              <a
                 key={o.name}
-                src={o.logo}
-                alt={o.name}
-                width={o.width}
-                height={o.height}
-                className={`w-auto ${i === 0 ? "h-[52px] desk:h-14" : "h-12 desk:h-[52px]"}`}
-              />
+                href={o.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${o.name} on Instagram`}
+                className="inline-flex items-center transition-opacity hover:opacity-75"
+              >
+                <Image
+                  src={o.logo}
+                  alt={o.name}
+                  width={o.width}
+                  height={o.height}
+                  className={`w-auto ${i === 0 ? "h-[52px] desk:h-14" : "h-10 desk:h-11"}`}
+                />
+              </a>
             ))}
           </div>
         </div>
@@ -55,6 +65,10 @@ export default function Footer() {
             </li>
           ))}
         </ul>
+
+        <p className="label m-0 w-full text-muted-dark">
+          © {site.name} {site.year} · Florida Gulf Coast University
+        </p>
       </div>
     </footer>
   );

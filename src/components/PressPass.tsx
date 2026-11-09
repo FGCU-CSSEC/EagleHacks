@@ -1,16 +1,21 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 
-const MAX = (55 * Math.PI) / 180;
-const STIFFNESS = 22; // g / L: how quickly the pendulum swings
-const DAMPING = 1.1;
+// Pendulum model; angles are in radians, positive is clockwise.
+const MAX_ANGLE = (55 * Math.PI) / 180;
+const STIFFNESS = 22; // gravity / cord length: higher swings faster
+const DAMPING = 2.2;
+const IDLE_SWAY = 0.012;
+const BRUSH_GAIN = 0.02; // angular speed added per pixel of pointer movement
+const MAX_BRUSH_SPEED = 1.6;
+const MAX_RELEASE_SPEED = 3;
 
 /**
- * A press pass on a lanyard that hangs from the top of the hero. It sways on
- * its own, swings when the mouse brushes it, and can be dragged and let go.
- * Decorative only: hidden from assistive tech and not focusable. Static with
- * reduced motion.
+ * Decorative press pass (public/brand/press-pass.png) hanging from the top of the hero.
+ * It sways, reacts to the pointer brushing past, and can be dragged and released.
+ * Hidden from assistive tech; static when the user prefers reduced motion.
  */
 export default function PressPass() {
   const anchor = useRef<HTMLDivElement>(null);
@@ -21,11 +26,11 @@ export default function PressPass() {
     const swingEl = swing.current;
     if (!anchorEl || !swingEl) return;
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      swingEl.style.transform = "rotate(-3deg)";
+      swingEl.style.transform = "rotate(-2deg)";
       return;
     }
 
-    let theta = 0.3; // radians, positive = clockwise; start with a small swing
+    let theta = 0.06;
     let omega = 0;
     let dragging = false;
     let lastDragAngle = 0;
@@ -35,7 +40,7 @@ export default function PressPass() {
 
     const angleTo = (x: number, y: number) => {
       const r = anchorEl.getBoundingClientRect();
-      return Math.max(-MAX, Math.min(MAX, Math.atan2(r.left + r.width / 2 - x, y - r.top)));
+      return Math.max(-MAX_ANGLE, Math.min(MAX_ANGLE, Math.atan2(r.left + r.width / 2 - x, y - r.top)));
     };
 
     const tick = (now: number) => {
@@ -45,16 +50,16 @@ export default function PressPass() {
         omega += (-STIFFNESS * Math.sin(theta) - DAMPING * omega) * dt;
         theta += omega * dt;
       }
-      const idle = dragging ? 0 : 0.03 * Math.sin(now / 1100);
+      const idle = dragging ? 0 : IDLE_SWAY * Math.sin(now / 1500);
       swingEl.style.transform = `rotate(${(theta + idle) * (180 / Math.PI)}deg)`;
       frame = requestAnimationFrame(tick);
     };
 
-    const onEnterMove = (e: PointerEvent) => {
+    const onBrush = (e: PointerEvent) => {
       if (dragging || e.pointerType !== "mouse") return;
       const r = swingEl.getBoundingClientRect();
       const inside = e.clientX > r.left && e.clientX < r.right && e.clientY > r.top && e.clientY < r.bottom;
-      if (inside) omega = Math.max(-4, Math.min(4, omega - e.movementX * 0.05));
+      if (inside) omega = Math.max(-MAX_BRUSH_SPEED, Math.min(MAX_BRUSH_SPEED, omega - e.movementX * BRUSH_GAIN));
     };
     const onDown = (e: PointerEvent) => {
       dragging = true;
@@ -75,11 +80,11 @@ export default function PressPass() {
     const onUp = () => {
       if (!dragging) return;
       dragging = false;
-      omega = Math.max(-6, Math.min(6, omega));
+      omega = Math.max(-MAX_RELEASE_SPEED, Math.min(MAX_RELEASE_SPEED, omega));
       last = performance.now();
     };
 
-    document.addEventListener("pointermove", onEnterMove);
+    document.addEventListener("pointermove", onBrush);
     swingEl.addEventListener("pointerdown", onDown);
     swingEl.addEventListener("pointermove", onMove);
     swingEl.addEventListener("pointerup", onUp);
@@ -87,7 +92,7 @@ export default function PressPass() {
     frame = requestAnimationFrame(tick);
     return () => {
       cancelAnimationFrame(frame);
-      document.removeEventListener("pointermove", onEnterMove);
+      document.removeEventListener("pointermove", onBrush);
       swingEl.removeEventListener("pointerdown", onDown);
       swingEl.removeEventListener("pointermove", onMove);
       swingEl.removeEventListener("pointerup", onUp);
@@ -99,29 +104,19 @@ export default function PressPass() {
     <div
       ref={anchor}
       aria-hidden="true"
-      className="absolute right-24 top-0 z-10 hidden w-[132px] select-none min-[1100px]:block"
+      className="absolute right-24 top-0 z-10 hidden w-[150px] select-none min-[1100px]:block"
     >
-      <div ref={swing} className="origin-top cursor-grab touch-none active:cursor-grabbing" style={{ transformOrigin: "50% 0" }}>
-        {/* Lanyard strap with stitching and clip */}
-        <div className="mx-auto -mt-6 h-[104px] w-4 bg-accent shadow-[inset_2px_0_0_rgba(255,255,255,0.25),inset_-2px_0_0_rgba(0,0,0,0.25)]" />
-        <div className="mx-auto h-4 w-6 rounded-sm bg-[#8d8a82]" />
-        {/* The pass */}
-        <div className="relative -mt-1 rounded-md bg-paper px-3 pb-3 pt-6 text-ink shadow-[0_18px_30px_rgba(0,0,0,0.45)]">
-          <span className="absolute left-1/2 top-2 h-1.5 w-10 -translate-x-1/2 rounded-full bg-ink/80" />
-          <p className="cond m-0 text-center text-[46px] font-black leading-[0.9]">Press</p>
-          <div className="my-2 border-y-2 border-ink py-1 text-center">
-            <p className="label m-0 text-[9px] tracking-[0.18em]">EagleHacks 2027</p>
-          </div>
-          <p className="label m-0 text-center text-[9px] tracking-[0.18em] text-muted">Admit one hacker</p>
-          <div
-            className="mt-2.5 h-7"
-            style={{
-              background:
-                "repeating-linear-gradient(90deg, #111 0 2px, transparent 2px 4px, #111 4px 5px, transparent 5px 8px, #111 8px 11px, transparent 11px 13px)",
-            }}
-          />
-          <p className="label m-0 mt-1.5 text-center text-[9px] tracking-[0.18em]">Mar 12–14</p>
-        </div>
+      <div ref={swing} data-cursor-grow className="origin-top touch-none">
+        <Image
+          src="/brand/press-pass.png"
+          alt=""
+          width={656}
+          height={1510}
+          sizes="320px"
+          priority
+          draggable={false}
+          className="-mt-3 block h-auto w-full drop-shadow-[0_18px_22px_rgba(0,0,0,0.5)]"
+        />
       </div>
     </div>
   );

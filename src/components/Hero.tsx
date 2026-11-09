@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Countdown from "@/components/Countdown";
 import Cta from "@/components/Cta";
 import PressPass from "@/components/PressPass";
 import RegisterButton from "@/components/RegisterButton";
@@ -19,21 +20,24 @@ export default async function Hero() {
   return (
     <section aria-labelledby="hero-h" className="relative overflow-hidden bg-ink text-paper">
       {/* Oversized eagle, cropped by the section edge. */}
-      <Image
-        src="/brand/eagle-white.png"
-        alt=""
+      <div
         aria-hidden="true"
-        width={448}
-        height={733}
-        priority
-        className="pointer-events-none absolute -right-24 -bottom-[220px] h-[520px] w-auto max-w-none desk:bottom-auto desk:right-[-6%] desk:top-16 desk:h-[clamp(520px,72vw,1040px)]"
-      />
+        className="pointer-events-none absolute -right-24 -bottom-[220px] desk:bottom-auto desk:right-[-6%] desk:top-16"
+      >
+        <Image
+          src="/brand/eagle-white.png"
+          alt=""
+          width={448}
+          height={733}
+          priority
+          className="h-[520px] w-auto max-w-none desk:h-[clamp(520px,72vw,1040px)]"
+        />
+      </div>
 
       {/*
-        MLH trust badge: once EagleHacks is accepted as an MLH member event,
-        MLH sends badge code that must be placed in the top corner of the site.
-        Paste it here. The top-right corner is reserved for it (the header and
-        hero copy keep clear of this area).
+        MLH trust badge: once EagleHacks is accepted as an MLH member event, MLH provides
+        badge code that must sit in the top corner of the site. Paste it here. The top-right
+        corner is reserved for it; the header and hero copy keep clear of this area.
       */}
       <div
         id="mlh-badge-slot"
@@ -45,7 +49,7 @@ export default async function Hero() {
       <div className="wrap-wide relative">
         <SiteHeader nav={nav} dates={eventDates} instagram={site.links.instagram} linkedin={site.links.linkedin} />
 
-        <div className="max-w-[640px] pb-[316px] desk:max-w-[min(640px,58vw)] pt-10 desk:pb-28 desk:pt-[120px]">
+        <div className="hero-copy pb-[316px] pt-10 desk:pb-[clamp(56px,9svh,112px)] desk:pt-[clamp(32px,8svh,120px)]">
           <p className="label mb-5 text-muted-dark desk:mb-7">{site.tagline}</p>
           <h1 id="hero-h">
             <Image
@@ -81,6 +85,8 @@ export default async function Hero() {
             </Cta>
             <RegisterButton variant="status" />
           </div>
+
+          <Countdown start={`${site.startDate}T00:00:00-05:00`} end={`${site.endDate}T23:59:59-04:00`} />
         </div>
       </div>
     </section>

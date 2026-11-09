@@ -1,9 +1,8 @@
-// ---------------------------------------------------------------------------
-// EagleHacks site settings
-// Dates, cap, registration state/window, application URL and RSVP window now
-// live in the site_settings table (edit at /admin/settings). The values here are
-// the fallback when the database is unreachable or a setting is unset.
-// ---------------------------------------------------------------------------
+// Site content and fallback settings.
+//
+// Dates, cap, registration state and window, application URL and the RSVP window are stored in the
+// site_settings table (edited at /admin/settings). The values in `site` below are used when the
+// database is unreachable or a setting is unset. Everything else here is plain content.
 
 export type RegistrationState = "coming-soon" | "open" | "waitlist" | "closed";
 
@@ -13,16 +12,18 @@ export const site = {
   tagline: "FGCU's 4th Annual Hackathon",
   dates: "March 12–14, 2027",
   startDate: "2027-03-12",
-  location: "Florida Gulf Coast University, Fort Myers, FL",
+  endDate: "2027-03-14",
+  venue: "Academic Building 9 (AB 9)",
+  address: ["Academic Building 9 (AB9)", "11098 FGCU Blvd. N.", "Fort Myers, FL 33965"],
+  mapUrl: "https://www.google.com/maps/search/?api=1&query=11098+FGCU+Blvd+N+Fort+Myers+FL+33965",
+  mapEmbedUrl: "https://www.google.com/maps?q=11098+FGCU+Blvd+N,+Fort+Myers,+FL+33965&z=17&output=embed",
   hours: 36,
   cap: 200,
   rsvpWindowDays: 7, // days an accepted hacker has to confirm
-  organizer: "FGCU Computer Science & Software Engineering Club (CSSEC) and INIT FGCU",
   url: "https://eagle-hacks.com",
 
   registration: {
-    // Manual state. Change this and redeploy (or set NEXT_PUBLIC_REGISTRATION_STATE
-    // in Vercel) to flip the button.
+    // Manual state. Change it and redeploy, or set NEXT_PUBLIC_REGISTRATION_STATE.
     state: (process.env.NEXT_PUBLIC_REGISTRATION_STATE as RegistrationState) || "coming-soon",
     // Shown while state is "coming-soon".
     opensLabel: "January 2027",
@@ -37,6 +38,8 @@ export const site = {
     devpost: "", // add the 2027 Devpost link when it exists
     hackerGuide: "", // add the public Notion guide link when it exists
     mlhCodeOfConduct: "https://github.com/MLH/mlh-policies/blob/main/code-of-conduct.md",
+    mlhPrivacy: "https://github.com/MLH/mlh-policies/blob/main/privacy-policy.md",
+    mlhTerms: "https://github.com/MLH/mlh-policies/blob/main/contest-terms.md",
   },
 } as const;
 
@@ -76,19 +79,25 @@ export const faq: { q: string; a: string }[] = [
 ];
 
 // Organizing groups, shown with their logos in the footer.
-export const organizers: { name: string; logo: string; width: number; height: number }[] = [
+export const organizers: { name: string; logo: string; width: number; height: number; instagram: string }[] = [
   {
     name: "FGCU Computer Science & Software Engineering Club (CSSEC)",
     logo: "/brand/cssec-white.png",
     width: 600,
     height: 514,
+    instagram: "https://www.instagram.com/fgcu_cssec/",
   },
-  { name: "INIT FGCU", logo: "/brand/init-fgcu-white.png", width: 454, height: 326 },
+  {
+    name: "INIT FGCU",
+    logo: "/brand/init-fgcu-wordmark-white.png",
+    width: 1057,
+    height: 408,
+    instagram: "https://www.instagram.com/init.fgcu/",
+  },
 ];
 
-// 2027 team, in display order. Headshots: drop a file named after the key into
-// public/photos/headshots/ (e.g. allison.webp; .jpg, .jpeg and .png also work).
-// Until a file exists the card shows initials.
+// Team members in display order. A headshot is picked up from public/photos/headshots/ by key
+// (e.g. allison.webp; .jpg, .jpeg and .png also work). Without one, the card shows initials.
 export const team: { key: string; name: string; role: string; linkedin?: string }[] = [
   { key: "allison", name: "Allison Brown", role: "Logistics, Communications, Budgeting, Marketing, Events", linkedin: "https://www.linkedin.com/in/abrown27/" },
   { key: "jeremy", name: "Jeremy Goldberg", role: "Logistics, Events", linkedin: "https://www.linkedin.com/in/jeremygoldbergswe/" },
@@ -112,6 +121,3 @@ export const sponsorPerks: { title: string; body: string }[] = [
   { title: "Showcase", body: "Run a workshop or put your API and hardware in hackers’ hands." },
   { title: "Invest locally", body: "Back Southwest Florida’s student tech community." },
 ];
-
-// 2027 sponsors go here as they sign. Leave empty to show the "become a sponsor" message.
-export const sponsors: { name: string; url: string; logo?: string }[] = [];

@@ -12,7 +12,11 @@
   --accent: #2f6fd6;
   --focus: #2f6fd6;
 
-  /* Aliases for the older .btn / .wrap styles still used by the admin pages and unfinished sections. */
+  /* Layout rhythm: gutters and section padding, on an 8px grid. */
+  --gutter: 20px;
+  --section-y: 72px;
+
+  /* Legacy tokens for the admin pages (.btn, .wrap). */
   --surface: #f3f0e8;
   --line: #cfc9bb;
   --blue: #2f6fd6;
@@ -139,32 +143,38 @@ h3 {
   cursor: not-allowed;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .btn {
-    transition: none;
+@media (min-width: 761px) {
+  :root {
+    --gutter: 32px;
+    --section-y: 112px;
   }
 }
 
-/* Layout helpers for the re-skinned sections (the admin pages still use .wrap). */
 @layer components {
   .wrap-wide {
     width: 100%;
     max-width: 1240px;
     margin-inline: auto;
-    padding-inline: 1.25rem;
+    padding-inline: var(--gutter);
   }
 
+  /* Vertical padding for a section; -b is bottom only, for a section that follows its neighbour directly. */
   .sec-pad {
-    padding-block: 72px;
+    padding-block: var(--section-y);
+  }
+
+  .sec-pad-b {
+    padding-bottom: var(--section-y);
+  }
+
+  /* Hero copy column: capped by width, and by screen height so the CTA and countdown stay on the first screen. */
+  .hero-copy {
+    max-width: 640px;
   }
 
   @media (min-width: 761px) {
-    .wrap-wide {
-      padding-inline: 2rem;
-    }
-
-    .sec-pad {
-      padding-block: 112px;
+    .hero-copy {
+      max-width: min(640px, 58vw, max(380px, calc((100svh - 430px) / 0.3)));
     }
   }
 
@@ -189,8 +199,14 @@ h3 {
     letter-spacing: 0.14em;
   }
 
-  /* Hero CTA / sponsor CTA buttons (square, condensed). */
+  /* Square condensed call-to-action. On hover a solid color wipes in from the left (and out to
+     the right on leave), the label recolors and the arrow slides forward. */
   .cta {
+    --fill: var(--accent);
+    --fill-fg: #fff;
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
@@ -202,11 +218,39 @@ h3 {
     font-size: 22px;
     font-weight: 800;
     text-decoration: none;
-    transition: opacity 150ms ease;
+    transition: color 0.35s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .cta:hover {
-    opacity: 0.85;
+  .cta::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--fill);
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .cta > span {
+    display: inline-block;
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .cta:hover,
+  .cta:focus-visible {
+    color: var(--fill-fg);
+  }
+
+  .cta:hover::before,
+  .cta:focus-visible::before {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .cta:hover > span,
+  .cta:focus-visible > span {
+    transform: translateX(6px);
   }
 
   .cta-paper {
@@ -217,6 +261,8 @@ h3 {
   .cta-accent {
     background: var(--accent);
     color: #fff;
+    --fill: var(--ink);
+    --fill-fg: var(--paper);
   }
 
   @media (min-width: 761px) {
@@ -224,9 +270,20 @@ h3 {
       font-size: 24px;
     }
   }
+
+  /* Underline that draws in on hover (nav, text links). */
+  .link-underline {
+    background: linear-gradient(currentColor, currentColor) left bottom / 0 1px no-repeat;
+    transition: background-size 0.3s ease;
+  }
+
+  .link-underline:hover,
+  .link-underline:focus-visible {
+    background-size: 100% 1px;
+  }
 }
 
-/* Photo mosaic: 12 columns, two 300px rows on desktop; 2 columns on mobile. */
+/* Photo mosaic: 2 columns on mobile; 12 columns and two 300px rows on desktop. */
 .mosaic {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -262,8 +319,17 @@ h3 {
   .m-award { grid-column: 10 / 13; grid-row: 1 / 3; }
 }
 
-/* Set by CustomCursor on mouse devices: hide the system cursor, we draw our own. */
+/* Set by CustomCursor on pointer devices: hide the system cursor, since the component draws its own. */
 html.custom-cursor,
 html.custom-cursor * {
   cursor: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .cta,
+  .cta::before,
+  .cta > span {
+    transition: none;
+  }
 }
