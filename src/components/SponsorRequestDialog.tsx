@@ -235,7 +235,7 @@ export default function SponsorRequestDialog({ email }: { email: string }) {
                       data-autofocus
                       autoComplete="name"
                       required
-                      placeholder="Jordan Smith"
+                      placeholder="John Smith"
                       value={values.name}
                       onChange={setField("name")}
                       aria-invalid={!!errors.name}
@@ -250,7 +250,7 @@ export default function SponsorRequestDialog({ email }: { email: string }) {
                       type="text"
                       autoComplete="organization"
                       required
-                      placeholder="Acme Corp"
+                      placeholder="Company name"
                       value={values.organization}
                       onChange={setField("organization")}
                       aria-invalid={!!errors.organization}
@@ -265,7 +265,7 @@ export default function SponsorRequestDialog({ email }: { email: string }) {
                       type="email"
                       autoComplete="email"
                       required
-                      placeholder="you@company.com"
+                      placeholder="name@company.com"
                       value={values.email}
                       onChange={setField("email")}
                       aria-invalid={!!errors.email}

@@ -3,9 +3,9 @@ import { test } from "node:test";
 import { validateSponsorRequest } from "./sponsorRequest.ts";
 
 const valid = {
-  name: "Jordan Smith",
-  organization: "Acme Corp",
-  email: "jordan@acmecorp.com",
+  name: "John Smith",
+  organization: "Example Company",
+  email: "john@example.com",
   phone: "",
   interests: [],
   message: "",
@@ -23,9 +23,9 @@ test("name, organization and email are required", () => {
 });
 
 test("email must look like an email address", () => {
-  assert.ok(validateSponsorRequest({ ...valid, email: "jordan@acme" }).email);
+  assert.ok(validateSponsorRequest({ ...valid, email: "john@example" }).email);
   assert.ok(validateSponsorRequest({ ...valid, email: "not an email" }).email);
-  assert.equal(validateSponsorRequest({ ...valid, email: " jordan@acmecorp.com " }).email, undefined);
+  assert.equal(validateSponsorRequest({ ...valid, email: " john@example.com " }).email, undefined);
 });
 
 test("a phone number, if given, needs at least seven digits", () => {
