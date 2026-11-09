@@ -3,12 +3,12 @@ import path from "node:path";
 import TeamCarousel from "@/components/TeamCarousel";
 import { team } from "@/config/site";
 
-const dir = path.join(process.cwd(), "public", "photos", "headshots");
+const HEADSHOT_DIR = path.join(process.cwd(), "public", "photos", "headshots");
 
-// Headshots are files named after the person's key in site.ts (allison.webp, ...).
+/** Maps each team key in site.ts to its headshot file (e.g. allison.webp), if one exists. */
 function headshotsByKey() {
   const found = new Map<string, string>();
-  for (const file of fs.existsSync(dir) ? fs.readdirSync(dir) : []) {
+  for (const file of fs.existsSync(HEADSHOT_DIR) ? fs.readdirSync(HEADSHOT_DIR) : []) {
     const { name, ext } = path.parse(file);
     if (/^\.(webp|jpe?g|png)$/i.test(ext)) found.set(name.toLowerCase(), `/photos/headshots/${file}`);
   }
@@ -21,7 +21,7 @@ export default function Team() {
 
   return (
     <section id="team" aria-labelledby="team-h" className="scroll-mt-4">
-      <div className="wrap-wide sec-pad">
+      <div className="wrap-wide sec-pad pt-0">
         <h2 id="team-h" className="h-display text-[clamp(56px,8vw,120px)]">
           The team
         </h2>

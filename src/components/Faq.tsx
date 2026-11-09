@@ -4,7 +4,7 @@ import { faq, site } from "@/config/site";
 export default function Faq() {
   return (
     <section id="faq" aria-labelledby="faq-h" className="scroll-mt-4">
-      <div className="wrap-wide sec-pad pb-12 desk:pb-24">
+      <div className="wrap-wide sec-pad">
         <h2 id="faq-h" className="h-display text-[clamp(56px,8vw,120px)]">
           FAQ
         </h2>

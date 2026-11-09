@@ -2,43 +2,38 @@
 
 import { useEffect, useRef } from "react";
 
-const interactive = "a, button, summary, [role='button'], label";
+const INTERACTIVE = "a, button, summary, [role='button'], label, [data-cursor-grow]";
 
 /**
- * Desktop-only cursor: a small dot that follows the pointer exactly and a ring
- * that trails it and swells over links and buttons. Uses difference blending so
- * it reads on both the ink and paper sections. Does nothing on touch devices.
+ * Pointer-device cursor: a small dot that tracks the pointer with no lag and swells over
+ * interactive elements. Difference blending keeps it visible on both dark and light
+ * sections. Renders nothing on touch devices.
  */
 export default function CustomCursor() {
   const dot = useRef<HTMLDivElement>(null);
-  const ring = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!window.matchMedia("(hover: hover) and (pointer: fine)").matches) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const dotEl = dot.current;
-    const ringEl = ring.current;
-    if (!dotEl || !ringEl) return;
+    const el = dot.current;
+    if (!el) return;
 
-    const html = document.documentElement;
-    html.classList.add("custom-cursor");
+    const root = document.documentElement;
+    root.classList.add("custom-cursor");
 
-    let x = -100;
-    let y = -100;
-    let rx = x;
-    let ry = y;
-    let scale = 1;
-    let targetScale = 1;
     let visible = false;
+    let hovering = false;
+    let pressed = false;
+    let x = 0;
+    let y = 0;
     let frame = 0;
 
     const draw = () => {
-      rx += (x - rx) * (reduce ? 1 : 0.18);
-      ry += (y - ry) * (reduce ? 1 : 0.18);
-      scale += (targetScale - scale) * (reduce ? 1 : 0.2);
-      dotEl.style.transform = `translate3d(${x - 4}px, ${y - 4}px, 0) scale(${targetScale > 1 ? 0.4 : 1})`;
-      ringEl.style.transform = `translate3d(${rx - 18}px, ${ry - 18}px, 0) scale(${scale})`;
-      frame = requestAnimationFrame(draw);
+      frame = 0;
+      el.style.transform = `translate3d(${x}px, ${y}px, 0)`;
+      el.dataset.state = pressed ? "down" : hovering ? "grow" : "idle";
+    };
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(draw);
     };
 
     const onMove = (e: PointerEvent) => {
@@ -46,39 +41,48 @@ export default function CustomCursor() {
       y = e.clientY;
       if (!visible) {
         visible = true;
-        rx = x;
-        ry = y;
-        dotEl.style.opacity = ringEl.style.opacity = "1";
+        el.style.opacity = "1";
       }
-      targetScale = (e.target as Element | null)?.closest?.(interactive) ? 2 : 1;
+      hovering = !!(e.target as Element | null)?.closest?.(INTERACTIVE);
+      schedule();
     };
-    const onDown = () => (targetScale = 0.7);
-    const onUp = () => (targetScale = 1);
+    const onDown = () => {
+      pressed = true;
+      schedule();
+    };
+    const onUp = () => {
+      pressed = false;
+      schedule();
+    };
     const onLeave = () => {
       visible = false;
-      dotEl.style.opacity = ringEl.style.opacity = "0";
+      el.style.opacity = "0";
     };
 
     document.addEventListener("pointermove", onMove);
     document.addEventListener("pointerdown", onDown);
     document.addEventListener("pointerup", onUp);
-    document.documentElement.addEventListener("pointerleave", onLeave);
-    frame = requestAnimationFrame(draw);
+    root.addEventListener("pointerleave", onLeave);
 
     return () => {
       cancelAnimationFrame(frame);
       document.removeEventListener("pointermove", onMove);
       document.removeEventListener("pointerdown", onDown);
       document.removeEventListener("pointerup", onUp);
-      document.documentElement.removeEventListener("pointerleave", onLeave);
-      html.classList.remove("custom-cursor");
+      root.removeEventListener("pointerleave", onLeave);
+      root.classList.remove("custom-cursor");
     };
   }, []);
 
   return (
-    <div aria-hidden="true" className="pointer-events-none fixed inset-0 z-[100] hidden mix-blend-difference [@media(hover:hover)_and_(pointer:fine)]:block">
-      <div ref={ring} className="absolute left-0 top-0 h-9 w-9 rounded-full border-[1.5px] border-white opacity-0 transition-opacity duration-200" />
-      <div ref={dot} className="absolute left-0 top-0 h-2 w-2 rounded-full bg-white opacity-0 transition-opacity duration-200" />
+    <div
+      aria-hidden="true"
+      className="pointer-events-none fixed inset-0 z-[100] hidden mix-blend-difference [@media(hover:hover)_and_(pointer:fine)]:block"
+    >
+      {/* The outer element follows the pointer with no easing; only the inner dot eases its size. */}
+      <div ref={dot} className="group absolute left-0 top-0 opacity-0 transition-opacity duration-150" data-state="idle">
+        <div className="-ml-1.5 -mt-1.5 h-3 w-3 rounded-full bg-white transition-transform duration-200 ease-[cubic-bezier(0.2,0.8,0.2,1)] group-data-[state=down]:scale-[0.7] group-data-[state=grow]:scale-[3.4]" />
+      </div>
     </div>
   );
 }

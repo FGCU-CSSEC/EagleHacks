@@ -1,14 +1,14 @@
-import CustomCursor from "@/components/CustomCursor";
 import About from "@/components/About";
+import CustomCursor from "@/components/CustomCursor";
 import Faq from "@/components/Faq";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
+import Location from "@/components/Location";
 import PhotoMosaic from "@/components/PhotoMosaic";
 import Sponsors from "@/components/Sponsors";
 import Team from "@/components/Team";
-import Ticker from "@/components/Ticker";
 
-// Dev-only instant-navigation check flags the cached settings read; the build is unaffected.
+// Opt out of the dev-only instant-navigation check; the settings read is cached and does not affect the build.
 export const instant = false;
 
 export default function Home() {
@@ -25,11 +25,10 @@ export default function Home() {
       <main id="main">
         <Hero />
         <PhotoMosaic />
-        <Ticker />
         <About />
+        <Location />
         <Sponsors />
         <Faq />
-
         <Team />
       </main>
       <Footer />
