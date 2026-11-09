@@ -265,6 +265,22 @@ h3 {
     --fill-fg: var(--paper);
   }
 
+  .cta-ink {
+    background: var(--ink);
+    color: var(--paper);
+    --fill: var(--accent);
+    --fill-fg: #fff;
+  }
+
+  .cta:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .cta:disabled::before {
+    display: none;
+  }
+
   @media (min-width: 761px) {
     .cta {
       font-size: 24px;
@@ -325,11 +341,56 @@ html.custom-cursor * {
   cursor: none !important;
 }
 
+/* Sponsor packet dialog: dark overlay and a short fade-in. */
+.sponsor-dialog::backdrop {
+  background: rgb(17 17 17 / 0.8);
+}
+
+.sponsor-dialog[open] {
+  animation: dialog-in 0.2s ease-out;
+}
+
+.sponsor-dialog[open]::backdrop {
+  animation: backdrop-in 0.2s ease-out;
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
+}
+
+/* The custom cursor is drawn beneath the browser's top layer, so use the system cursor in dialogs. */
+html.custom-cursor dialog[open],
+html.custom-cursor dialog[open] * {
+  cursor: auto !important;
+}
+
+html.custom-cursor dialog[open] button:not(:disabled) {
+  cursor: pointer !important;
+}
+
+html.custom-cursor dialog[open] button:disabled {
+  cursor: not-allowed !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .btn,
   .cta,
   .cta::before,
   .cta > span {
     transition: none;
+  }
+
+  .sponsor-dialog[open],
+  .sponsor-dialog[open]::backdrop {
+    animation: none;
   }
 }

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Cta from "@/components/Cta";
+import SponsorRequestDialog from "@/components/SponsorRequestDialog";
 import { site, sponsorPerks } from "@/config/site";
 
 export default function Sponsors() {
@@ -41,13 +41,7 @@ export default function Sponsors() {
             ))}
           </ul>
           <div className="mt-10 flex flex-col gap-x-7 gap-y-4 desk:flex-row desk:flex-wrap desk:items-center">
-            <Cta
-              variant="accent"
-              href={`mailto:${site.links.email}?subject=EagleHacks%20${site.year}%20sponsorship`}
-              className="w-full desk:w-auto"
-            >
-              Request the sponsor packet
-            </Cta>
+            <SponsorRequestDialog email={site.links.email} />
             <p className="m-0 text-[15px] text-muted-dark">In-kind welcome: food, swag, hardware, cloud credits.</p>
           </div>
         </div>

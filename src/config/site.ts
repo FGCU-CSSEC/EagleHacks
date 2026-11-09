@@ -74,7 +74,7 @@ export const faq: { q: string; a: string }[] = [
   },
   {
     q: "How can my company sponsor?",
-    a: "Email fgcu.cssec@gmail.com and we will send the 2027 sponsorship packet.",
+    a: "Request the 2027 sponsorship packet using the form in the Sponsors section, or email fgcu.cssec@gmail.com.",
   },
 ];
 
