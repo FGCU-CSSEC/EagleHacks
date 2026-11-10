@@ -14,13 +14,13 @@ export const site = {
   startDate: "2027-03-12",
   endDate: "2027-03-14",
   venue: "Academic Building 9 (AB 9)",
-  address: ["Academic Building 9 (AB9)", "11098 FGCU Blvd. N.", "Fort Myers, FL 33965"],
-  mapUrl: "https://www.google.com/maps/search/?api=1&query=11098+FGCU+Blvd+N+Fort+Myers+FL+33965",
-  mapEmbedUrl: "https://www.google.com/maps?q=11098+FGCU+Blvd+N,+Fort+Myers,+FL+33965&z=17&output=embed",
+  address: ["Academic Building 9 (AB9)", "10501 FGCU Blvd. S.", "Fort Myers, FL 33965"],
+  mapUrl: "https://www.google.com/maps/search/?api=1&query=10501+FGCU+Blvd+S+Fort+Myers+FL+33965",
+  mapEmbedUrl: "https://www.google.com/maps?q=10501+FGCU+Blvd+S,+Fort+Myers,+FL+33965&z=17&output=embed",
   hours: 36,
   cap: 200,
   rsvpWindowDays: 7, // days an accepted hacker has to confirm
-  url: "https://eagle-hacks.com",
+  url: "https://eaglehacks.net",
 
   registration: {
     // Manual state. Change it and redeploy, or set NEXT_PUBLIC_REGISTRATION_STATE.

@@ -52,9 +52,10 @@ export default async function Hero() {
         <div className="hero-copy pb-[316px] pt-10 desk:pb-[clamp(56px,9svh,112px)] desk:pt-[clamp(32px,8svh,120px)]">
           <p className="label mb-5 text-muted-dark desk:mb-7">{site.tagline}</p>
           <h1 id="hero-h">
+            <span className="sr-only">EagleHacks 2027 – FGCU’s Hackathon, March 12–14, 2027</span>
             <Image
               src="/brand/wordmark-white.png"
-              alt="EagleHacks"
+              alt=""
               width={733}
               height={100}
               priority
@@ -63,7 +64,7 @@ export default async function Hero() {
             />
             <Image
               src="/brand/2027-white.png"
-              alt="2027"
+              alt=""
               width={564}
               height={229}
               priority
