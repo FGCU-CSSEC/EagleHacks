@@ -265,6 +265,22 @@ h3 {
     --fill-fg: var(--paper);
   }
 
+  .cta-ink {
+    background: var(--ink);
+    color: var(--paper);
+    --fill: var(--accent);
+    --fill-fg: #fff;
+  }
+
+  .cta:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .cta:disabled::before {
+    display: none;
+  }
+
   @media (min-width: 761px) {
     .cta {
       font-size: 24px;
@@ -319,10 +335,30 @@ h3 {
   .m-award { grid-column: 10 / 13; grid-row: 1 / 3; }
 }
 
-/* Set by CustomCursor on pointer devices: hide the system cursor, since the component draws its own. */
-html.custom-cursor,
-html.custom-cursor * {
-  cursor: none !important;
+/* Sponsor packet dialog: dark overlay and a short fade-in. */
+.sponsor-dialog::backdrop {
+  background: rgb(17 17 17 / 0.8);
+}
+
+.sponsor-dialog[open] {
+  animation: dialog-in 0.2s ease-out;
+}
+
+.sponsor-dialog[open]::backdrop {
+  animation: backdrop-in 0.2s ease-out;
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes backdrop-in {
+  from {
+    opacity: 0;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -331,5 +367,10 @@ html.custom-cursor * {
   .cta::before,
   .cta > span {
     transition: none;
+  }
+
+  .sponsor-dialog[open],
+  .sponsor-dialog[open]::backdrop {
+    animation: none;
   }
 }

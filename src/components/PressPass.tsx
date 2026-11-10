@@ -106,7 +106,7 @@ export default function PressPass() {
       aria-hidden="true"
       className="absolute right-24 top-0 z-10 hidden w-[150px] select-none min-[1100px]:block"
     >
-      <div ref={swing} data-cursor-grow className="origin-top touch-none">
+      <div ref={swing} className="origin-top touch-none">
         <Image
           src="/brand/press-pass.png"
           alt=""
