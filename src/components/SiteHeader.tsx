@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import Cta from "@/components/Cta";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
+import Cta from "@/components/Cta";
 
 type NavItem = { href: string; label: string };
 

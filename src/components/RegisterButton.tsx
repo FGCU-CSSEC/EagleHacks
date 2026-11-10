@@ -27,16 +27,18 @@ function Follow() {
 
 export default async function RegisterButton({ size = "lg", variant = "button" }: Props) {
   const { state, applicationUrl: formUrl } = await getPublicSettings();
+  const canApply = (state === "open" || state === "waitlist") && !!formUrl;
+  const applyLabel = state === "open" ? "Apply now" : "Join the waitlist";
 
   if (variant === "status") {
     const textCls = "m-0 text-sm leading-[1.45] text-on-dark desk:text-[15px]";
-    if ((state === "open" || state === "waitlist") && formUrl) {
+    if (canApply) {
       return (
         <p className={textCls}>
           {state === "open" ? "Hacker applications are open." : "Applications are full; join the waitlist."}
           <br />
           <a href={formUrl} target="_blank" rel="noopener noreferrer" className={textLink}>
-            {state === "open" ? "Apply now" : "Join the waitlist"}
+            {applyLabel}
           </a>
           .
         </p>
@@ -52,10 +54,10 @@ export default async function RegisterButton({ size = "lg", variant = "button" }
 
   const cls = size === "lg" ? "btn btn-lg" : "btn btn-sm";
 
-  if ((state === "open" || state === "waitlist") && formUrl) {
+  if (canApply) {
     return (
       <a className={`${cls} btn-primary`} href={formUrl} target="_blank" rel="noopener noreferrer">
-        {state === "open" ? "Apply now" : "Join the waitlist"}
+        {applyLabel}
       </a>
     );
   }

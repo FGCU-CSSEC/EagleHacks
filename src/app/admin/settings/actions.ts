@@ -4,6 +4,7 @@ import { updateTag } from "next/cache";
 import { redirect } from "next/navigation";
 import { fromEasternInput } from "@/lib/eastern";
 import { SETTINGS_TAG, STATES } from "@/lib/settings";
+import { isAdmin } from "@/lib/staff";
 import { createClient } from "@/lib/supabase/server";
 
 export type SaveState = { ok?: boolean; error?: string };
@@ -28,12 +29,7 @@ export async function saveSettings(_prev: SaveState, formData: FormData): Promis
   const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return { error: "Sign in first." };
-  const { data: role } = await supabase
-    .from("staff_roles")
-    .select("role")
-    .eq("user_id", user.id)
-    .maybeSingle();
-  if (role?.role !== "admin") return { error: "Admins only." };
+  if (!(await isAdmin(supabase, user.id))) return { error: "Admins only." };
 
   const text = (name: string) => String(formData.get(name) ?? "").trim();
 

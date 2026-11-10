@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import "@fontsource-variable/archivo/wdth.css";
 import { site } from "@/config/site";
@@ -55,7 +56,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(eventJsonLd) }} />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <Analytics />
+      </body>
     </html>
   );
 }

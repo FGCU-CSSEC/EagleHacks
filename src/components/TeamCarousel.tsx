@@ -29,6 +29,9 @@ function Arrow({ dir }: { dir: "prev" | "next" }) {
   );
 }
 
+const navBtn =
+  "inline-flex h-12 w-12 items-center justify-center rounded-full border border-ink/40 text-ink transition-colors duration-200 hover:border-ink hover:bg-ink hover:text-paper disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:border-ink/40 disabled:hover:bg-transparent disabled:hover:text-ink";
+
 /** Scroll-snap row of team portraits with a progress line and previous/next buttons. */
 export default function TeamCarousel({ members }: { members: Member[] }) {
   const track = useRef<HTMLUListElement>(null);
@@ -60,8 +63,6 @@ export default function TeamCarousel({ members }: { members: Member[] }) {
     el.scrollBy({ left: dir * step, behavior: reduce ? "auto" : "smooth" });
   };
 
-  const navBtn =
-    "inline-flex h-12 w-12 items-center justify-center rounded-full border border-ink/40 text-ink transition-colors duration-200 hover:border-ink hover:bg-ink hover:text-paper disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:border-ink/40 disabled:hover:bg-transparent disabled:hover:text-ink";
 
   return (
     <div className="px-3 desk:px-10">

@@ -51,27 +51,30 @@ export default async function Hero() {
 
         <div className="hero-copy pb-[316px] pt-10 desk:pb-[clamp(56px,9svh,112px)] desk:pt-[clamp(32px,8svh,120px)]">
           <p className="label mb-5 text-muted-dark desk:mb-7">{site.tagline}</p>
-          <h1 id="hero-h">
-            <span className="sr-only">EagleHacks 2027 – FGCU’s Hackathon, March 12–14, 2027</span>
-            <Image
-              src="/brand/wordmark-white.png"
-              alt=""
-              width={733}
-              height={100}
-              priority
-              sizes="(min-width: 761px) 640px, 100vw"
-              className="block h-auto w-full"
-            />
-            <Image
-              src="/brand/2027-white.png"
-              alt=""
-              width={564}
-              height={229}
-              priority
-              sizes="(min-width: 761px) 295px, 56vw"
-              className="mt-3.5 block h-auto w-[56%] desk:mt-5 desk:w-[46%]"
-            />
-          </h1>
+          <div className="relative">
+            <h1 id="hero-h">
+              <span className="sr-only">EagleHacks 2027 – FGCU’s Hackathon, March 12–14, 2027</span>
+              <Image
+                src="/brand/wordmark-white.png"
+                alt=""
+                width={733}
+                height={100}
+                priority
+                sizes="(min-width: 761px) 640px, 100vw"
+                className="block h-auto w-full"
+              />
+              <Image
+                src="/brand/2027-white.png"
+                alt=""
+                width={564}
+                height={229}
+                priority
+                sizes="(min-width: 761px) 295px, 56vw"
+                className="mt-3.5 block h-auto w-[56%] desk:mt-5 desk:w-[46%]"
+              />
+            </h1>
+            <PressPass variant="inline" />
+          </div>
           <p className="mt-7 text-lg font-bold leading-[1.35] desk:mt-10 desk:text-xl">
             {eventDates}
             <span className="hidden desk:inline">&nbsp; |&nbsp; </span>

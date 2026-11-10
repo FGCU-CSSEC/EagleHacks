@@ -1,4 +1,5 @@
 import type { ComponentProps } from "react";
+import ArrowIcon from "@/components/ArrowIcon";
 
 type Props = ComponentProps<"a"> & { variant?: "paper" | "accent" };
 
@@ -6,7 +7,7 @@ type Props = ComponentProps<"a"> & { variant?: "paper" | "accent" };
 export default function Cta({ variant = "paper", className = "", children, ...rest }: Props) {
   return (
     <a className={`cta cta-${variant} ${className}`} {...rest}>
-      {children} <span aria-hidden="true" className="font-normal [font-stretch:100%]">→</span>
+      {children} <ArrowIcon />
     </a>
   );
 }

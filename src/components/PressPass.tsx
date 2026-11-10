@@ -17,7 +17,8 @@ const MAX_RELEASE_SPEED = 3;
  * It sways, reacts to the pointer brushing past, and can be dragged and released.
  * Hidden from assistive tech; static when the user prefers reduced motion.
  */
-export default function PressPass() {
+export default function PressPass({ variant = "corner" }: { variant?: "corner" | "inline" }) {
+  const inline = variant === "inline";
   const anchor = useRef<HTMLDivElement>(null);
   const swing = useRef<HTMLDivElement>(null);
 
@@ -104,9 +105,17 @@ export default function PressPass() {
     <div
       ref={anchor}
       aria-hidden="true"
-      className="absolute right-24 top-0 z-10 hidden w-[150px] select-none min-[1100px]:block"
+      className={
+        inline
+          ? // Phones: hangs in the empty space beside "2027", just under the wordmark (13.64% of its width).
+            "absolute right-4 top-[calc((100vw-40px)*0.1364)] z-10 w-[68px] select-none desk:hidden"
+          : "absolute right-24 top-0 z-10 hidden w-[150px] select-none min-[1100px]:block"
+      }
     >
-      <div ref={swing} className="origin-top touch-none">
+      <div
+        ref={swing}
+        className={`origin-top touch-none ${inline ? "[mask-image:linear-gradient(to_bottom,transparent,black_26px)]" : ""}`}
+      >
         <Image
           src="/brand/press-pass.png"
           alt=""
@@ -115,7 +124,7 @@ export default function PressPass() {
           sizes="320px"
           priority
           draggable={false}
-          className="-mt-3 block h-auto w-full drop-shadow-[0_18px_22px_rgba(0,0,0,0.5)]"
+          className={`block h-auto w-full ${inline ? "drop-shadow-[0_6px_8px_rgba(0,0,0,0.5)]" : "-mt-3 drop-shadow-[0_18px_22px_rgba(0,0,0,0.5)]"}`}
         />
       </div>
     </div>
