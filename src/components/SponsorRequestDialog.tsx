@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useRef, useState, type ChangeEvent, type FormEvent, type MouseEvent, type ReactNode } from "react";
+import ArrowIcon from "@/components/ArrowIcon";
 import {
   SPONSOR_INTERESTS,
   submitSponsorRequest,
@@ -30,6 +31,16 @@ const fieldClass = (error?: string) =>
     error ? "border-red-700" : "border-line"
   }`;
 
+type TextFieldOptions = {
+  label: string;
+  hint?: string;
+  type?: "text" | "email" | "tel";
+  autoComplete: string;
+  placeholder: string;
+  autoFocus?: boolean;
+  optional?: boolean;
+};
+
 type FieldProps = { id: string; label: string; hint?: string; error?: string; children: ReactNode };
 
 function Field({ id, label, hint, error, children }: FieldProps) {
@@ -46,14 +57,6 @@ function Field({ id, label, hint, error, children }: FieldProps) {
         </p>
       )}
     </div>
-  );
-}
-
-function ArrowIcon() {
-  return (
-    <span aria-hidden="true" className="font-normal [font-stretch:100%]">
-      →
-    </span>
   );
 }
 
@@ -158,6 +161,28 @@ export default function SponsorRequestDialog({ email }: { email: string }) {
   const idFor = (name: FieldName) => `${formId}-${name}`;
   const describedBy = (name: FieldName) => (errors[name] ? `${idFor(name)}-error` : undefined);
 
+  const textField = (
+    name: FieldName,
+    { label, hint, type = "text", autoComplete, placeholder, autoFocus, optional }: TextFieldOptions,
+  ) => (
+    <Field id={idFor(name)} label={label} hint={hint} error={errors[name]}>
+      <input
+        id={idFor(name)}
+        name={name}
+        type={type}
+        data-autofocus={autoFocus ? "" : undefined}
+        autoComplete={autoComplete}
+        required={!optional}
+        placeholder={placeholder}
+        value={values[name]}
+        onChange={setField(name)}
+        aria-invalid={!!errors[name]}
+        aria-describedby={describedBy(name)}
+        className={`${fieldClass(errors[name])} h-11`}
+      />
+    </Field>
+  );
+
   return (
     <>
       <button
@@ -173,7 +198,7 @@ export default function SponsorRequestDialog({ email }: { email: string }) {
       <dialog
         ref={dialogRef}
         aria-labelledby={titleId}
-        className="sponsor-dialog m-auto overflow-hidden h-dvh max-h-none w-full max-w-none border-0 bg-paper p-0 text-ink open:flex open:flex-col desk:h-fit desk:max-h-[calc(100dvh-48px)] desk:w-[600px] desk:max-w-[calc(100vw-48px)]"
+        className="sponsor-dialog m-auto h-dvh max-h-none w-full overflow-hidden max-w-none border-0 bg-paper p-0 text-ink open:flex open:flex-col desk:h-fit desk:max-h-[calc(100dvh-48px)] desk:w-[600px] desk:max-w-[calc(100vw-48px)]"
         onCancel={handleCancel}
         onClose={handleClose}
         onMouseDown={handlePointerDown}
@@ -228,66 +253,26 @@ export default function SponsorRequestDialog({ email }: { email: string }) {
                 </p>
 
                 <div className="mt-5 grid gap-x-4 gap-y-4 desk:grid-cols-2">
-                  <Field id={idFor("name")} label="Your name" error={errors.name}>
-                    <input
-                      id={idFor("name")}
-                      name="name"
-                      type="text"
-                      data-autofocus
-                      autoComplete="name"
-                      required
-                      placeholder="John Smith"
-                      value={values.name}
-                      onChange={setField("name")}
-                      aria-invalid={!!errors.name}
-                      aria-describedby={describedBy("name")}
-                      className={`${fieldClass(errors.name)} h-11`}
-                    />
-                  </Field>
-                  <Field id={idFor("organization")} label="Company or organization" error={errors.organization}>
-                    <input
-                      id={idFor("organization")}
-                      name="organization"
-                      type="text"
-                      autoComplete="organization"
-                      required
-                      placeholder="Company name"
-                      value={values.organization}
-                      onChange={setField("organization")}
-                      aria-invalid={!!errors.organization}
-                      aria-describedby={describedBy("organization")}
-                      className={`${fieldClass(errors.organization)} h-11`}
-                    />
-                  </Field>
-                  <Field id={idFor("email")} label="Work email" error={errors.email}>
-                    <input
-                      id={idFor("email")}
-                      name="email"
-                      type="email"
-                      autoComplete="email"
-                      required
-                      placeholder="name@company.com"
-                      value={values.email}
-                      onChange={setField("email")}
-                      aria-invalid={!!errors.email}
-                      aria-describedby={describedBy("email")}
-                      className={`${fieldClass(errors.email)} h-11`}
-                    />
-                  </Field>
-                  <Field id={idFor("phone")} label="Phone" hint="(optional)" error={errors.phone}>
-                    <input
-                      id={idFor("phone")}
-                      name="phone"
-                      type="tel"
-                      autoComplete="tel"
-                      placeholder="(239) 555-0100"
-                      value={values.phone}
-                      onChange={setField("phone")}
-                      aria-invalid={!!errors.phone}
-                      aria-describedby={describedBy("phone")}
-                      className={`${fieldClass(errors.phone)} h-11`}
-                    />
-                  </Field>
+                  {textField("name", { label: "Your name", autoComplete: "name", placeholder: "John Smith", autoFocus: true })}
+                  {textField("organization", {
+                    label: "Company or organization",
+                    autoComplete: "organization",
+                    placeholder: "Company name",
+                  })}
+                  {textField("email", {
+                    label: "Work email",
+                    type: "email",
+                    autoComplete: "email",
+                    placeholder: "name@company.com",
+                  })}
+                  {textField("phone", {
+                    label: "Phone",
+                    hint: "(optional)",
+                    type: "tel",
+                    autoComplete: "tel",
+                    placeholder: "(239) 555-0100",
+                    optional: true,
+                  })}
                 </div>
 
                 <div role="group" aria-labelledby={interestsId} className="mt-5">

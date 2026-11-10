@@ -4,10 +4,10 @@ import { useState, useSyncExternalStore } from "react";
 
 type Item = { q: string; a: string };
 
-const desktop = "(min-width: 761px)";
+const DESKTOP_QUERY = "(min-width: 761px)";
 
 function subscribe(onChange: () => void) {
-  const mq = window.matchMedia(desktop);
+  const mq = window.matchMedia(DESKTOP_QUERY);
   mq.addEventListener("change", onChange);
   return () => mq.removeEventListener("change", onChange);
 }
@@ -20,7 +20,7 @@ export default function FaqList({ items }: { items: Item[] }) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const isDesktop = useSyncExternalStore(
     subscribe,
-    () => window.matchMedia(desktop).matches,
+    () => window.matchMedia(DESKTOP_QUERY).matches,
     () => false,
   );
 
