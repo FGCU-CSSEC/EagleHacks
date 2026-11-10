@@ -48,6 +48,37 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Slim ink scrollbars that match the site, on the page and in the dialog. */
+html,
+.sponsor-dialog * {
+  scrollbar-width: thin;
+  scrollbar-color: var(--ink) transparent;
+}
+
+html {
+  scrollbar-color: var(--ink) var(--paper);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--ink);
+}
+html::-webkit-scrollbar-track {
+  background: var(--paper);
+}
+
+/* Set by CustomCursor on mouse devices: hide the system cursor, we draw our own. */
+html.custom-cursor,
+html.custom-cursor * {
+  cursor: none !important;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;

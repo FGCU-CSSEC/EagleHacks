@@ -1,3 +1,4 @@
+import CustomCursor from "@/components/CustomCursor";
 import About from "@/components/About";
 import Faq from "@/components/Faq";
 import Footer from "@/components/Footer";
@@ -13,6 +14,7 @@ export const instant = false;
 export default function Home() {
   return (
     <>
+      <CustomCursor />
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded focus:bg-surface focus:px-3 focus:py-2"

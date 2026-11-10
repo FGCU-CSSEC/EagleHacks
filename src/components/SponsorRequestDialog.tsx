@@ -80,6 +80,7 @@ export default function SponsorRequestDialog({ email }: { email: string }) {
     const dialog = dialogRef.current;
     if (!dialog) return;
     dialog.showModal();
+    window.dispatchEvent(new Event("cursor:raise"));
     document.documentElement.style.overflow = "hidden";
     dialog.querySelector<HTMLElement>("[data-autofocus]")?.focus();
   };
@@ -172,7 +173,7 @@ export default function SponsorRequestDialog({ email }: { email: string }) {
       <dialog
         ref={dialogRef}
         aria-labelledby={titleId}
-        className="sponsor-dialog m-auto h-dvh max-h-none w-full max-w-none border-0 bg-paper p-0 text-ink open:flex open:flex-col desk:h-fit desk:max-h-[calc(100dvh-48px)] desk:w-[600px] desk:max-w-[calc(100vw-48px)]"
+        className="sponsor-dialog m-auto overflow-hidden h-dvh max-h-none w-full max-w-none border-0 bg-paper p-0 text-ink open:flex open:flex-col desk:h-fit desk:max-h-[calc(100dvh-48px)] desk:w-[600px] desk:max-w-[calc(100vw-48px)]"
         onCancel={handleCancel}
         onClose={handleClose}
         onMouseDown={handlePointerDown}
