@@ -51,6 +51,10 @@ Created by `scripts/setup-airtable.ts` (`npx tsx scripts/setup-airtable.ts`, nee
 - `School` is a single-line text field. Airtable caps selects at 10,000 options (it rejected MLH's ~17,500 unique schools), so MLH's "pick from the verified list" rule is not met by the Airtable form. Never trim the school list silently.
 - Free plan: 1,000 API calls/month. Batch reads and writes (up to 10 records per write call).
 
+## Airtable `Sponsors` table
+
+Filled by the "Request the sponsor packet" form (`SponsorRequestDialog` -> `POST /api/sponsor` -> `src/lib/sponsorAirtable.ts`). The route reads `AIRTABLE_TOKEN` (needs `data.records:write` on the base) and `AIRTABLE_BASE_ID`, server side only. Field names, exact: `Name`, `Company`, `Email`, `Phone`, `Interested In` (multiple select, options are `SPONSOR_INTERESTS` in `src/lib/sponsorRequest.ts`), `Message`, `Status` (New, Packet sent, In talks, Committed, Declined; the app only ever writes `New`), `Submitted` (created time, set by Airtable). A filled hidden `website` field is treated as spam: the route answers 200 and saves nothing. One Airtable call per request.
+
 ## TODO
 
 - **Before January: build the application form at `/apply` on our site (replaces the Airtable form).**

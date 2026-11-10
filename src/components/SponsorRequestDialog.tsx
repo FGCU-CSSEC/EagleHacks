@@ -207,8 +207,8 @@ export default function SponsorRequestDialog({ email }: { email: string }) {
                 Request sent
               </h2>
               <p className="m-0 mt-4 text-lg leading-snug text-body-light">
-                Thanks! The EagleHacks team will email the 2027 sponsorship packet to{" "}
-                <strong className="font-bold text-ink">{values.email.trim()}</strong>.
+                Thanks! The EagleHacks team will reach out to{" "}
+                <strong className="font-bold text-ink">{values.email.trim()}</strong> soon.
               </p>
               <p className="m-0 mt-3 text-[15px] text-muted">Questions in the meantime? Reach us at {email}.</p>
               <button type="button" onClick={closeDialog} className="cta cta-ink mt-8">

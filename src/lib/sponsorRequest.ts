@@ -39,14 +39,12 @@ export function validateSponsorRequest(request: SponsorRequest): SponsorRequestE
   return errors;
 }
 
-/**
- * Sends a sponsor packet request.
- *
- * TODO: placeholder. The backend teammate will replace this with a call to the real endpoint,
- * which should save the request to Airtable and drop any request whose `website` honeypot is
- * filled in. Reject the promise on failure so the form can show its error state.
- */
+/** Sends a sponsor packet request to /api/sponsor. Rejects if the server does not accept it. */
 export async function submitSponsorRequest(request: SponsorRequest): Promise<void> {
-  void request;
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  const response = await fetch("/api/sponsor", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(request),
+  });
+  if (!response.ok) throw new Error(`Sponsor request failed with status ${response.status}.`);
 }
