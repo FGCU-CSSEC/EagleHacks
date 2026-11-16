@@ -7,6 +7,7 @@ import Location from "@/components/Location";
 import PhotoMosaic from "@/components/PhotoMosaic";
 import Sponsors from "@/components/Sponsors";
 import Team from "@/components/Team";
+import ThankYou from "@/components/ThankYou";
 
 // Opt out of the dev-only instant-navigation check; the settings read is cached and does not affect the build.
 export const instant = false;
@@ -27,6 +28,7 @@ export default function Home() {
         <PhotoMosaic />
         <About />
         <Location />
+        <ThankYou />
         <Sponsors />
         <Faq />
         <Team />

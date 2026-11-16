@@ -10,7 +10,8 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     metadataBase: new URL(site.url),
     title: `${site.name} ${site.year} | FGCU`,
-    description: `${site.name} ${site.year}: a ${site.hours}-hour student hackathon at Florida Gulf Coast University, ${eventDates}.`,
+    description: `Join ${site.name} ${site.year}, FGCU's ${site.hours}-hour hackathon in Fort Myers, FL (${eventDates}). Team up, build something new, learn from workshops, and meet sponsors. Free for students, no experience needed.`,
+    applicationName: site.name,
     alternates: { canonical: "/" },
     openGraph: {
       images: [{ url: "/og-image.png", width: 1200, height: 630, alt: `${site.name} ${site.year}` }],
@@ -50,11 +51,29 @@ const eventJsonLd = {
   organizer: { "@type": "Organization", name: "CSSEC at FGCU", url: `${site.url}/` },
 };
 
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: `${site.name} ${site.year}`,
+  alternateName: [site.name, "EagleHacks FGCU"],
+  url: `${site.url}/`,
+};
+
+const orgJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: site.name,
+  url: `${site.url}/`,
+  logo: `${site.url}/icon.png`,
+};
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html lang="en">
       <head>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(eventJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }} />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(orgJsonLd) }} />
       </head>
       <body>
         {children}

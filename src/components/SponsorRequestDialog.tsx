@@ -236,7 +236,6 @@ export default function SponsorRequestDialog({ email }: { email: string }) {
                 Thanks! The EagleHacks team will reach out to{" "}
                 <strong className="font-bold text-ink">{values.email.trim()}</strong> soon.
               </p>
-              <p className="m-0 mt-3 text-[15px] text-muted">Questions in the meantime? Reach us at {email}.</p>
               <button type="button" onClick={closeDialog} className="cta cta-ink mt-8">
                 Back to the site
               </button>
