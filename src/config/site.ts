@@ -20,7 +20,7 @@ export const site = {
   hours: 36,
   cap: 200,
   rsvpWindowDays: 7, // days an accepted hacker has to confirm
-  url: "https://eaglehacks.net",
+  url: "https://www.eaglehacks.net",
 
   registration: {
     // Manual state. Change it and redeploy, or set NEXT_PUBLIC_REGISTRATION_STATE.
