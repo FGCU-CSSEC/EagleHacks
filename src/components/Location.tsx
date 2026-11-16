@@ -29,7 +29,7 @@ export default function Location() {
           </div>
 
           <iframe
-            title={`Map showing ${site.venue}, ${site.address[1]}, ${site.address[2]}`}
+            title={`Map showing ${site.venue}, ${site.address[2]}, ${site.address[3]}`}
             src={site.mapEmbedUrl}
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"

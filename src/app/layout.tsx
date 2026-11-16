@@ -41,7 +41,7 @@ const eventJsonLd = {
     name: "Florida Gulf Coast University, Academic Building 9",
     address: {
       "@type": "PostalAddress",
-      streetAddress: "10501 FGCU Blvd. S.",
+      streetAddress: "11098 FGCU Blvd. N.",
       addressLocality: "Fort Myers",
       addressRegion: "FL",
       postalCode: "33965",
