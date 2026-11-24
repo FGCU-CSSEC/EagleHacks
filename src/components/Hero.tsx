@@ -2,9 +2,9 @@ import Image from "next/image";
 import Countdown from "@/components/Countdown";
 import Cta from "@/components/Cta";
 import PressPass from "@/components/PressPass";
-import RegisterButton from "@/components/RegisterButton";
 import SiteHeader from "@/components/SiteHeader";
 import { site } from "@/config/site";
+import { REGISTER_URL } from "@/lib/links";
 import { getPublicSettings } from "@/lib/settings";
 
 const nav = [
@@ -49,7 +49,7 @@ export default async function Hero() {
       <div className="wrap-wide relative">
         <SiteHeader nav={nav} dates={eventDates} instagram={site.links.instagram} linkedin={site.links.linkedin} />
 
-        <div className="hero-copy pb-[316px] pt-10 desk:pb-[clamp(56px,9svh,112px)] desk:pt-[clamp(32px,8svh,120px)]">
+        <div className="hero-copy pb-[316px] pt-10 min-[600px]:pb-[190px] desk:pb-[clamp(56px,9svh,112px)] desk:pt-[clamp(32px,8svh,120px)]">
           <p className="label mb-5 text-muted-dark desk:mb-7">{site.tagline}</p>
           <div className="relative">
             <h1 id="hero-h">
@@ -84,10 +84,18 @@ export default async function Hero() {
           <p className="mt-0.5 text-base text-on-dark desk:text-lg">Florida Gulf Coast University</p>
 
           <div className="mt-7 flex flex-col gap-3.5 desk:mt-9 desk:flex-row desk:flex-wrap desk:items-center desk:gap-x-7 desk:gap-y-4">
+            <Cta
+              href={REGISTER_URL}
+              variant="accent"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full desk:w-auto"
+            >
+              Register
+            </Cta>
             <Cta href="#sponsors" className="w-full desk:w-auto">
               Sponsor EagleHacks
             </Cta>
-            <RegisterButton variant="status" />
           </div>
 
           <Countdown start={`${site.startDate}T00:00:00-05:00`} end={`${site.endDate}T23:59:59-04:00`} />

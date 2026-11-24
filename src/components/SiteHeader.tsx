@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Cta from "@/components/Cta";
+import { REGISTER_URL } from "@/lib/links";
 
 type NavItem = { href: string; label: string };
 
@@ -92,6 +93,14 @@ export default function SiteHeader({ nav, dates, instagram, linkedin }: Props) {
               {n.label}
             </a>
           ))}
+          <a
+            href={REGISTER_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="label link-underline inline-block py-3 no-underline"
+          >
+            Register
+          </a>
         </nav>
         <button
           ref={menuBtn}
@@ -141,7 +150,10 @@ export default function SiteHeader({ nav, dates, instagram, linkedin }: Props) {
           </nav>
           <div className={`mt-auto pt-12 ${riseClass(open)}`} style={rise(nav.length + 1)}>
             <p className="mb-4 text-[15px] text-on-dark">{dates} · Fort Myers, FL</p>
-            <Cta href="#sponsors" onClick={close} className="w-full">
+            <Cta href={REGISTER_URL} variant="accent" target="_blank" rel="noopener noreferrer" onClick={close} className="w-full">
+              Register
+            </Cta>
+            <Cta href="#sponsors" onClick={close} className="mt-3 w-full">
               Sponsor EagleHacks
             </Cta>
             <div className="mt-4 flex gap-6">

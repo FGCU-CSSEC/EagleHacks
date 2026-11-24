@@ -56,7 +56,7 @@ export default function Footer() {
           {links.map((l) => (
             <li key={l.label}>
               <a
-                className="label block py-[13px] desk:inline-block desk:py-3"
+                className="label link-underline inline-block py-[13px] text-on-dark no-underline transition-colors hover:text-paper focus-visible:text-paper desk:py-3"
                 href={l.href}
                 {...(l.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
               >
